@@ -7,9 +7,6 @@ namespace Treatail.NEO.TreatailAssetSmartContract
 {
     public class TreatailAsset : SmartContract
     {
-        //Name of the token
-        private static string _name = "TTL";
-
         private static string _assetOwnerPrefix = "O";
 
         private static string _assetDetailsPrefix = "D";
