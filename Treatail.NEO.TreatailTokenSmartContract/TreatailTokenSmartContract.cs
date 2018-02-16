@@ -134,7 +134,6 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns></returns>
         public static bool Transfer(byte[] from, byte[] to, BigInteger amount)
         {
-            //Do we need this for testnet?
             if (!Runtime.CheckWitness(from))
             {
                 Runtime.Notify("Cannot send, transaction not signed as the sender address.");
