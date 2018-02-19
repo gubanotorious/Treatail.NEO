@@ -71,7 +71,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
 
             //Deploy the full supply of tokens to the admin account
             Storage.Put(Storage.CurrentContext, _totalSupplyStorageKey, _maxSupply);
-            Storage.Put(Storage.CurrentContext, _owner.AsString(), _maxSupply);
+            Storage.Put(Storage.CurrentContext, _owner, _maxSupply);
 
             //Let's check the owner address to verify the balance
             var balance = BalanceOf(_owner);
@@ -125,7 +125,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns></returns>
         public static BigInteger BalanceOf(byte[] address)
         {
-            var balanceValue = Storage.Get(Storage.CurrentContext, address.AsString());
+            var balanceValue = Storage.Get(Storage.CurrentContext, address);
 
             if (balanceValue == null)
                 return 0;
@@ -165,8 +165,8 @@ namespace Treatail.NEO.TreatailTokenSmartContract
             }
 
             //Write the new account balances to storage
-            Storage.Put(Storage.CurrentContext, from.AsString(), fromAccountBalance - amount);
-            Storage.Put(Storage.CurrentContext, to.AsString(), toAccountBalance + amount);
+            Storage.Put(Storage.CurrentContext, from, fromAccountBalance - amount);
+            Storage.Put(Storage.CurrentContext, to, toAccountBalance + amount);
 
             //Notify the runtime of the transfer
             Transferred(from, to, amount);
@@ -186,7 +186,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <param name="value">BigInteger - number of tokens sent</param>
         private static void Transferred(byte[] from, byte[] to, BigInteger amount)
         {
-            Runtime.Notify("TTL Transferred", from, to.AsString(), amount);
+            Runtime.Notify("TTL Transferred", from, to, amount);
         }
 
         #endregion
