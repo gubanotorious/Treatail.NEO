@@ -7,6 +7,9 @@ namespace Treatail.NEO.TreatailTokenSmartContract
 {
     public class TreatailToken : SmartContract
     {
+        //Owner
+        private static readonly byte[] _owner = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y".ToScriptHash();
+
         //Name of the token
         private static string _name = "TTL";
 
@@ -20,15 +23,10 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         private const string _totalSupplyStorageKey = "total_supply";
 
         //1 bil, account for 8 decimal places
-        private const ulong _maxSupply = 100000000000000000; 
-
-        //Owner address
-        private static readonly byte[] _owner = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y".ToScriptHash();
+        private const ulong _maxSupply = 100000000000000000;
 
         public static object Main(string action, params object[] args)
         {
-            Runtime.Notify(action);
-
             switch (action)
             {
                 case "decimals":
@@ -44,7 +42,6 @@ namespace Treatail.NEO.TreatailTokenSmartContract
                 case "transfer":
                     return Transfer((byte[])args[0], (byte[])args[1], (BigInteger)args[2]);
             }
-
             return false;
         }
 
@@ -56,17 +53,18 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns></returns>
         public static bool Deploy()
         {
-            if (!Runtime.CheckWitness(_owner))
-            {
-                Runtime.Log("No permissions to deploy tokens.");
-                return false;
-            }
-                
+            //Comment out for debug
+            //if (!Runtime.CheckWitness(_owner))
+            //{
+            //    Runtime.Log("No permissions to deploy tokens.");
+            //    return false;
+            //}
+
             var totalSupply = TotalSupply();
             if (totalSupply > 0)
             {
                 Runtime.Log("Token(s) already deployed.");
-                Runtime.Notify(totalSupply);             
+                Runtime.Notify(totalSupply);
                 return false;
             }
 
@@ -74,7 +72,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
 
             //Deploy the full supply of tokens to the admin account
             Storage.Put(Storage.CurrentContext, _totalSupplyStorageKey, _maxSupply);
-            Storage.Put(Storage.CurrentContext, _owner, _maxSupply);
+            Storage.Put(Storage.CurrentContext, _owner.AsString(), _maxSupply);
 
             //Let's check the owner address to verify the balance
             var balance = BalanceOf(_owner);
@@ -110,7 +108,15 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns>BigInteger - token supply</returns>
         public static BigInteger TotalSupply()
         {
-            return Storage.Get(Storage.CurrentContext, _totalSupplyStorageKey).AsBigInteger();
+            var supplyValue = Storage.Get(Storage.CurrentContext, _totalSupplyStorageKey);
+
+            BigInteger supply = 0;
+            if (supplyValue != null)
+                supply = supplyValue.AsBigInteger();
+
+            Runtime.Notify("TTL Total Supply", supply);
+
+            return supply;
         }
 
         /// <summary>
@@ -120,7 +126,15 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns></returns>
         public static BigInteger BalanceOf(byte[] address)
         {
-            return Storage.Get(Storage.CurrentContext, address).AsBigInteger();
+            var balanceValue = Storage.Get(Storage.CurrentContext, address.AsString());
+
+            if (balanceValue == null)
+                return 0;
+
+            var balance = balanceValue.AsBigInteger();
+            Runtime.Notify("TTL Balance", address, balance);
+       
+            return balance;
         }
 
         /// <summary>
@@ -132,33 +146,28 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns></returns>
         public static bool Transfer(byte[] from, byte[] to, BigInteger amount)
         {
-            if (!Runtime.CheckWitness(from))
-            {
-                Runtime.Notify("Cannot send, transaction not signed as the sender address.");
-                return false;
-            }
-                
+            //Comment out for debug
+            //if (!Runtime.CheckWitness(from))
+            //{
+            //    Runtime.Notify("Cannot send, transaction not signed as the sender address.");
+            //    return false;
+            //}
+
             //Let's get the balance of the from account and verify we can do this
-            byte[] fromValue = Storage.Get(Storage.CurrentContext, from);
-            BigInteger fromAccountBalance = 0;
-            if (fromValue != null)
-                fromAccountBalance = fromValue.AsBigInteger();
+            BigInteger fromAccountBalance = BalanceOf(from);
 
             //Get the balance of the receiving address
-            byte[] toValue = Storage.Get(Storage.CurrentContext, to);
-            BigInteger toAccountBalance = 0;
-            if(toValue == null)
-                toAccountBalance = toValue.AsBigInteger();
+            BigInteger toAccountBalance = BalanceOf(to);
 
-            if(fromAccountBalance < amount)
+            if (fromAccountBalance < amount)
             {
                 Runtime.Notify("Cannot send, insufficient balance in sender address.");
                 return false;
             }
 
             //Write the new account balances to storage
-            Storage.Put(Storage.CurrentContext, from, fromAccountBalance - amount);
-            Storage.Put(Storage.CurrentContext, to, toAccountBalance + amount);
+            Storage.Put(Storage.CurrentContext, from.AsString(), fromAccountBalance - amount);
+            Storage.Put(Storage.CurrentContext, to.AsString(), toAccountBalance + amount);
 
             //Notify the runtime of the transfer
             Transferred(from, to, amount);
@@ -178,7 +187,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <param name="value">BigInteger - number of tokens sent</param>
         private static void Transferred(byte[] from, byte[] to, BigInteger amount)
         {
-            Runtime.Notify("TTL Transferred", from, to, amount);
+            Runtime.Notify("TTL Transferred", from, to.AsString(), amount);
         }
 
         #endregion

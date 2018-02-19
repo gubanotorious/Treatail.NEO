@@ -16,22 +16,18 @@ namespace Treatail.NEO.TreatailAssetSmartContract
         {
             if (args == null || args.Length == 0)
             {
-                Runtime.Log("Insufficient arguments provided.");
+                Runtime.Notify("Insufficient arguments provided.");
                 return false;
             }
-
-            string treatailId = (string)args[0];
-            Runtime.Log(string.Concat("Action ",action));
-            Runtime.Log(string.Concat("TreatailId ", treatailId));
 
             switch (action)
             {
                 case "details":
-                    return Details(treatailId);
+                    return AssetDetails((byte[])args[0]);
                 case "create":
-                    return Create(treatailId, (byte[])args[1], (byte[])args[2]);
+                    return CreateAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
                 case "transfer":
-                    return Transfer(treatailId, (byte[])args[1], (byte[])args[2]);         
+                    return TransferAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);         
             }
 
             return false;
@@ -42,9 +38,9 @@ namespace Treatail.NEO.TreatailAssetSmartContract
         /// </summary>
         /// <param name="treatailId">string - Treatail Asset identifier</param>
         /// <returns></returns>
-        public static byte[] Details(string treatailId)
+        public static byte[] AssetDetails(byte[] treatailId)
         {
-            return Storage.Get(Storage.CurrentContext, string.Concat("D",treatailId));
+            return Storage.Get(Storage.CurrentContext, string.Concat("D",treatailId.AsString()));
         }
 
 
@@ -55,32 +51,30 @@ namespace Treatail.NEO.TreatailAssetSmartContract
         /// <param name="address">byte[] - address of the Treatail Asset owner</param>
         /// <param name="assetDetails">byte[] - Treatail Asset details payload</param>
         /// <returns></returns>
-        public static bool Create(string treatailId, byte[] address, byte[] assetDetails)
+        public static bool CreateAsset(byte[] treatailId, byte[] address, byte[] assetDetails)
         {
-            if (!Runtime.CheckWitness(_treatail))
-            {
-                Runtime.Log("You do not have permissions to create assets.");
-                Runtime.Notify("You do not have permissions to create assets.");
-                return false;
-            }
+            //Remove for debugging
+            //if (!Runtime.CheckWitness(_treatail))
+            //{
+            //    Runtime.Notify("You do not have permissions to create assets.");
+            //    return false;
+            //}
 
             ////Verify the asset doesn't already exist
-            byte[] treatailAsset = Details(treatailId);         
+            byte[] treatailAsset = AssetDetails(treatailId);         
             if (treatailAsset != null && treatailAsset.Length > 0)
             {
-                Runtime.Log("Asset already exists and cannot be created.  Use transfer instead.");
+                Runtime.Notify("Asset already exists", treatailId);
                 return false;
             }
 
-            //Set the asset details
-            Runtime.Log("Asset not found, creating");
-            Storage.Put(Storage.CurrentContext, string.Concat("D",treatailId), assetDetails);
-            Runtime.Log("Asset created");
+            //Create the asset
+            Storage.Put(Storage.CurrentContext, string.Concat("D",treatailId.AsString()), assetDetails);
+            Runtime.Notify("Asset created", treatailId);
 
             //Set the asset owner
-            Runtime.Log("Assigning...");
-            Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId), address);
-            Runtime.Log("Asset owner assigned");
+            Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId.AsString()), address);
+            Runtime.Notify("Asset transferred",treatailId,address);
 
             return true;
         }
@@ -92,7 +86,7 @@ namespace Treatail.NEO.TreatailAssetSmartContract
         /// <param name="from">byte[] - address of the current owner of the Treatail Asset</param>
         /// <param name="to">byte[] - address of the new owner for the Treatail Asset</param>
         /// <returns>bool - success</returns>
-        public static bool Transfer(string treatailId, byte[] from, byte[] to)
+        public static bool TransferAsset(byte[] treatailId, byte[] from, byte[] to)
         {
             //Check the caller
             //if (!Runtime.CheckWitness(from)) 
@@ -103,23 +97,17 @@ namespace Treatail.NEO.TreatailAssetSmartContract
             //}
 
             //Check that they are the owner
-            //byte[] owner = Storage.Get(Storage.CurrentContext, string.Concat("O", treatailId));
-            //if(owner == null || owner.Length == 0 || owner != from)
-            //{
-            //    Runtime.Log("Cannot transfer, from account is not the owner of this asset.");
-            //    Runtime.Notify("Cannot transfer, from account is not the owner of this asset.");
-            //    return false;
-            //}
+            byte[] owner = Storage.Get(Storage.CurrentContext, string.Concat("O", treatailId.AsString()));
+            if (owner == null || owner.Length == 0 || owner != from)
+            {
+                Runtime.Notify("Cannot transfer, from account is not the owner of this asset.");
+                return false;
+            }
 
             //Update the asset ownership record
-            //Set the asset owner
-            Runtime.Log("Assigning...");
-            Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId), to);
-            Runtime.Log("Asset transferred");
+            Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId.AsString()), to);
+            Runtime.Notify("Asset transferred", treatailId, to);
             return true;
         }
-
-        //[Appcall("17069BAAE1E5A0892E6C97AF0D7BAFD5E876C4E9E0B5319275")] //Contract address
-        //public static extern int TransferTTL(byte[] address);
     }
 }
