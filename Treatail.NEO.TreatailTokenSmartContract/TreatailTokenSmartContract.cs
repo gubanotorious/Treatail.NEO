@@ -63,8 +63,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
             var totalSupply = TotalSupply();
             if (totalSupply > 0)
             {
-                Runtime.Log("Token(s) already deployed.");
-                Runtime.Notify(totalSupply);
+                Runtime.Notify("Tokens already deployed.");
                 return false;
             }
 
