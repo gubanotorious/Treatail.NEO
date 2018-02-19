@@ -65,8 +65,8 @@ namespace Treatail.NEO.TreatailTokenSmartContract
             var totalSupply = TotalSupply();
             if (totalSupply > 0)
             {
-                Runtime.Notify(totalSupply);
                 Runtime.Log("Token(s) already deployed.");
+                Runtime.Notify(totalSupply);             
                 return false;
             }
 
@@ -110,8 +110,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns>BigInteger - token supply</returns>
         public static BigInteger TotalSupply()
         {
-            var totalSupplyValue = Storage.Get(Storage.CurrentContext, _totalSupplyStorageKey);
-            return totalSupplyValue.AsBigInteger();
+            return Storage.Get(Storage.CurrentContext, _totalSupplyStorageKey).AsBigInteger();
         }
 
         /// <summary>
@@ -121,8 +120,7 @@ namespace Treatail.NEO.TreatailTokenSmartContract
         /// <returns></returns>
         public static BigInteger BalanceOf(byte[] address)
         {
-            var balanceValue = Storage.Get(Storage.CurrentContext, address);
-            return balanceValue.AsBigInteger();
+            return Storage.Get(Storage.CurrentContext, address).AsBigInteger();
         }
 
         /// <summary>
