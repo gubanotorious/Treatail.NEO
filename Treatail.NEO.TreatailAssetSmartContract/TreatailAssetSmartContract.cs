@@ -1,5 +1,8 @@
 ﻿using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services.Neo;
+using Neo.SmartContract;
+using Neo.VM;
+using Neo.SmartContract.Framework.Services.System;
 using System;
 using System.Numerics;
 
@@ -22,173 +25,105 @@ namespace Treatail.NEO.TreatailAssetSmartContract
             }
 
             string treatailId = (string)args[0];
+            Runtime.Log(string.Concat("Action ",action));
+            Runtime.Log(string.Concat("TreatailId ", treatailId));
 
             switch (action)
             {
                 case "details":
-                    return Details((string)args[0]);
+                    return Details(treatailId);
                 case "create":
-                    if (args.Length < 2)
-                    {
-                        Runtime.Notify("Insufficient parameters provided to create asset.");
-                        return false;
-                    }
-                    return Create((string)args[0], (byte[])args[1], (byte[])args[2]);
+                    return Create(treatailId, (byte[])args[1], (byte[])args[2]);
                 case "transfer":
-                    if (args.Length < 3)
-                    {
-                        Runtime.Notify("Insufficient parameters provided to transfer asset.");
-                        return false;
-                    }
-                    return Transfer((string)args[0],(byte[])args[1],(byte[])args[2]);         
+                    return Transfer(treatailId, (byte[])args[1], (byte[])args[2]);         
             }
 
             return false;
         }
 
         /// <summary>
-        /// Used to retrieve a Treatail Asset
+        /// Used to retrieve details about a Treatail Asset 
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="treatailId">string - Treatail Asset identifier</param>
         /// <returns></returns>
         public static byte[] Details(string treatailId)
         {
-            return GetAssetDetails(treatailId);
+            return Storage.Get(Storage.CurrentContext, string.Concat("D",treatailId));
         }
 
+
         /// <summary>
-        /// This will create a treatail asset.  Owner information is already seralized into the payload
+        /// Used to create a Treatail asset and assign the owner
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="treatailId">string - Treatail Asset identifier</param>
+        /// <param name="address">byte[] - address of the Treatail Asset owner</param>
+        /// <param name="assetDetails">byte[] - Treatail Asset details payload</param>
         /// <returns></returns>
         public static bool Create(string treatailId, byte[] address, byte[] assetDetails)
         {
             if (!Runtime.CheckWitness(_treatail))
             {
                 Runtime.Log("You do not have permissions to create assets.");
-                return false;
-            }
-            else if(address == null || address.Length == 0)
-            {
-                Runtime.Notify("Invalid address provided for create");
-                return false;
-            }
-            else if (assetDetails == null || assetDetails.Length == 0)
-            {
-                Runtime.Notify("No asset details provided");
-                return false;
-            }
-           
-            //Verify the asset doesn't already exist
-            byte[] treatailAsset = Details(treatailId);
-            if (treatailAsset.Length > 0)
-            {
-                Runtime.Notify("Asset already exists and cannot be created.  Use transfer instead.");
+                Runtime.Notify("You do not have permissions to create assets.");
                 return false;
             }
 
+            ////Verify the asset doesn't already exist
+            byte[] treatailAsset = Details(treatailId);         
+            if (treatailAsset != null && treatailAsset.Length > 0)
+            {
+                Runtime.Log("Asset already exists and cannot be created.  Use transfer instead.");
+                return false;
+            }
+
+            //Set the asset details
+            Runtime.Log("Asset not found, creating");
+            Storage.Put(Storage.CurrentContext, string.Concat("D",treatailId), assetDetails);
+            Runtime.Log("Asset created");
+
             //Set the asset owner
-            SetAssetOwner(treatailId, address);
+            Runtime.Log("Assigning...");
+            Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId), address);
+            Runtime.Log("Asset owner assigned");
 
             return true;
         }
 
         /// <summary>
-        /// 
+        /// Transfers ownership of a Treatail Asset between addresses 
         /// </summary>
-        /// <param name="treatailId">string - treatail asset identifier</param>
-        /// <param name="from">byte[] - address of the current owner of the treatail asset</param>
-        /// <param name="to">byte[] - address of the new owner for the asset</param>
+        /// <param name="treatailId">string - Treatail Asset identifier</param>
+        /// <param name="from">byte[] - address of the current owner of the Treatail Asset</param>
+        /// <param name="to">byte[] - address of the new owner for the Treatail Asset</param>
         /// <returns>bool - success</returns>
         public static bool Transfer(string treatailId, byte[] from, byte[] to)
         {
-            if(from == null || from.Length == 0)
-            {
-                Runtime.Notify("No sender address specified for transfer.");
-                return false;
-            }
-            else if (from == null || from.Length == 0)
-            {
-                Runtime.Notify("No receiving address specified for transfer.");
-                return false;
-            }
+            //Check the caller
+            //if (!Runtime.CheckWitness(from)) 
+            //{
+            //    Runtime.Log("Cannot transfer, transaction not signed with sender account.");
+            //    Runtime.Notify("Cannot transfer, transaction not signed with sender account.");         
+            //    return false;
+            //}
 
-            //Go get the owner info
-            byte[] assetOwner = GetAssetOwner(treatailId);                 
-            if(assetOwner == null || assetOwner.Length == 0)
-            {
-                Runtime.Notify("Cannot transfer, asset identifier is invalid.");
-                return false;
-            }
-            else if (!Runtime.CheckWitness(from)) 
-            {
-                Runtime.Notify("Cannot transfer, transaction not signed with sender account.");
-                return false;
-            }
+            //Check that they are the owner
+            //byte[] owner = Storage.Get(Storage.CurrentContext, string.Concat("O", treatailId));
+            //if(owner == null || owner.Length == 0 || owner != from)
+            //{
+            //    Runtime.Log("Cannot transfer, from account is not the owner of this asset.");
+            //    Runtime.Notify("Cannot transfer, from account is not the owner of this asset.");
+            //    return false;
+            //}
 
             //Update the asset ownership record
-            SetAssetOwner(treatailId, to);
-
+            //Set the asset owner
+            Runtime.Log("Assigning...");
+            Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId), to);
+            Runtime.Log("Asset transferred");
             return true;
         }
 
-        /// <summary>
-        /// Retrieves the owner information for the specified asset
-        /// </summary>
-        /// <param name="treatailId">string - treatail asset identifier.</param>
-        /// <returns>byte[] - address of the current asset owner</returns>
-        private static byte[] GetAssetOwner(string treatailId)
-        {
-            var key = _assetOwnerPrefix + treatailId;
-            return Storage.Get(Storage.CurrentContext, key);
-        }
-
-        /// <summary>
-        /// Sets the owner for the asset
-        /// </summary>
-        /// <param name="treatailId">string - treatail identifier for the asset</param>
-        /// <param name="owner">byte[] - address to assign the asset ownership to</param>
-        /// <returns>bool - success</returns>
-        public static bool SetAssetOwner(string treatailId, byte[] owner)
-        {
-            var key = _assetOwnerPrefix + treatailId;
-            Storage.Put(Storage.CurrentContext, key, owner);
-            return true;
-        }
-
-        /// <summary>
-        /// Retrieves the asset details
-        /// </summary>
-        /// <param name="treatailId">string - treatail asset identifier</param>
-        /// <returns>byte[] - retrieves the details for the specified asset</returns>
-        private static byte[] GetAssetDetails(string treatailId)
-        {
-            var key = _assetDetailsPrefix + treatailId;
-            return Storage.Get(Storage.CurrentContext, key);
-        }
-
-        /// <summary>
-        /// Sets the asset details in NEO Storage
-        /// </summary>
-        /// <param name="treatailId">string - treatail asset identifier</param>
-        /// <param name="assetDetails">byte[] - the details payload to be written for the asset</param>
-        /// <returns></returns>
-        private static bool SetAssetDetails(string treatailId, byte[] assetDetails)
-        {
-            var key = _assetDetailsPrefix + treatailId;
-            Storage.Put(Storage.CurrentContext, key, assetDetails);
-            return true;
-        }
-
-        /// <summary>
-        /// Notify the runtime that an asset was transferred
-        /// </summary>
-        /// <param name="from">byte[] - address that the asset was sent from</param>
-        /// <param name="to">byte[] - address that the asset was sent to</param>
-        /// <param name="treatailId">string - treatail asset identifier</param>
-        private static void Transferred(byte[] from, byte[] to, string treatailId)
-        {
-            Runtime.Notify("Asset Transferred", from, to, treatailId);
-        }
+        //[Appcall("17069BAAE1E5A0892E6C97AF0D7BAFD5E876C4E9E0B5319275")] //Contract address
+        //public static extern int TransferTTL(byte[] address);
     }
 }

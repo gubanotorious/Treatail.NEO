@@ -63,4 +63,8 @@
     </Message>
     <ConvertTask DataSource="$(TargetPath)" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

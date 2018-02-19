@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.TreatailTokenS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.TreatailAssetSmartContract", "Treatail.NEO.TreatailAssetSmartContract\Treatail.NEO.TreatailAssetSmartContract.csproj", "{5000CE5E-117F-403B-863C-49AD0F1209F4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "neo", "..\..\NEO\neo\neo\neo.csproj", "{61190B5D-7ACA-47A1-93FB-95F292B150C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5000CE5E-117F-403B-863C-49AD0F1209F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5000CE5E-117F-403B-863C-49AD0F1209F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5000CE5E-117F-403B-863C-49AD0F1209F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61190B5D-7ACA-47A1-93FB-95F292B150C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61190B5D-7ACA-47A1-93FB-95F292B150C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61190B5D-7ACA-47A1-93FB-95F292B150C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61190B5D-7ACA-47A1-93FB-95F292B150C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
