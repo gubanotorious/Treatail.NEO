@@ -10,10 +10,6 @@ namespace Treatail.NEO.TreatailAssetSmartContract
 {
     public class TreatailAsset : SmartContract
     {
-        private static string _assetOwnerPrefix = "O";
-
-        private static string _assetDetailsPrefix = "D";
-
         private static readonly byte[] _treatail = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y".ToScriptHash();
 
         public static object Main(string action, object[] args)
