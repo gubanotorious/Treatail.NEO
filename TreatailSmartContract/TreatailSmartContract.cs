@@ -32,57 +32,32 @@ namespace TreatailSmartContract
         public static object Main(string action, params object[] args)
         {
             //TTL Actions
-            if (action == "name")
-            {
+            if (action == "name") //NEP5 required
                 return Name();
-            }
-            if (action == "symbol")
-            {
+            if (action == "symbol") //NEP5 required
                 return Symbol();
-            }
-            else if (action == "decimals")
-            {
+            else if (action == "decimals") //NEP5 required
                 return Decimals();
-            }
-            else if (action == "deploy")
-            {
-                return DeployTokens();
-            }
-            else if (action == "balanceOf")
-            {
+            else if (action == "balanceOf") //NEP5 required
                 return BalanceOf((byte[])args[0]);
-            }
-            else if (action == "totalSupply")
-            {
+            else if (action == "totalSupply") //NEP5 required
                 return TotalSupply();
-            }
-            else if (action == "transfer")
-            {
+            else if (action == "transfer") //NEP5 required
                 return Transfer((byte[])args[0], (byte[])args[1], (BigInteger)args[2]);
-            }
+            else if (action == "deploy")
+                return DeployTokens();
 
             //TTA Actions
             if (action == "setassetcreatecost")
-            {
                 return SetAssetCreateCost((BigInteger)args[0]);
-            }
             else if (action == "getactioncreatecost")
-            {
                 return GetAssetCreateCost();
-            }
             else if (action == "getassetdetails")
-            {
                 return GetAssetDetails((byte[])args[0]);
-            }
             else if (action == "createasset")
-            {
                 return CreateAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
-            }
             else if (action == "transferasset")
-            {
                 return TransferAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
-            }
-
 
             Runtime.Notify("Missing or invalid action");
             return false;
@@ -186,13 +161,14 @@ namespace TreatailSmartContract
         }
 
         /// <summary>
-        /// Deploys the tokens to the admin account
+        /// Deploys the tokens to the Treatail admin account
         /// </summary>
         /// <param name="originator">byte[] - originator of the request</param>
         /// <param name="supply">BigInteger</param>
         /// <returns></returns>
         public static bool DeployTokens()
         {
+            //If we have the total supply in storage, we've deployed the tokens already
             var totalSupply = TotalSupply();
             if (totalSupply > 0)
             {
@@ -200,10 +176,11 @@ namespace TreatailSmartContract
                 return false;
             }
 
+            //Store the max token supply after we deployed it, this will prevent re-deploys
             Storage.Put(Storage.CurrentContext, _tokenTotalSupplyStorageKey, _tokenMaxSupply);
+            //Write the storage record for the "deploy" of the tokens to the Treatail admin account
             Storage.Put(Storage.CurrentContext, _treatailAddress, _tokenMaxSupply);
-
-            //Let's check the owner address to verify the balance
+            //Let's check the owner address and output the actual balance to ensure the storage set / get worked.
             Runtime.Notify("Deployed", _treatailAddress, BalanceOf(_treatailAddress));
 
             return true;
