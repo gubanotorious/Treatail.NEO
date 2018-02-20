@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreatailSmartContract", "TreatailSmartContract\TreatailSmartContract.csproj", "{0AAD5174-B471-483A-89C4-ED7163B2D455}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.Service", "Treatail.NEO.Service\Treatail.NEO.Service.csproj", "{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "neo", "..\..\NEO\neo\neo\neo.csproj", "{82C34FFC-D9BF-43A4-AA9C-52CCA632B283}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "neo-cli", "..\..\NEO\neo-cli\neo-cli\neo-cli.csproj", "{3D3E2A13-4633-465E-8826-E1E17597192F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.SmartContracts.TreatailContract", "Treatail.NEO.SmartContracts.TreatailContract\Treatail.NEO.SmartContracts.TreatailContract.csproj", "{C40C4D9A-8617-4539-AADD-BC26065FAA54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo.Lux", "..\neo-lux\neo-lux\Neo.Lux.csproj", "{B3AAA0D3-304E-4408-A052-E3E8A8FA2006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neo-gui", "..\..\NEO\neo-gui-developer\neo-gui\neo-gui.csproj", "{CFC243F0-F4E3-4754-8E21-8BA17E1C1788}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +21,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0AAD5174-B471-483A-89C4-ED7163B2D455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AAD5174-B471-483A-89C4-ED7163B2D455}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AAD5174-B471-483A-89C4-ED7163B2D455}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AAD5174-B471-483A-89C4-ED7163B2D455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82C34FFC-D9BF-43A4-AA9C-52CCA632B283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C34FFC-D9BF-43A4-AA9C-52CCA632B283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C34FFC-D9BF-43A4-AA9C-52CCA632B283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C34FFC-D9BF-43A4-AA9C-52CCA632B283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3E2A13-4633-465E-8826-E1E17597192F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3E2A13-4633-465E-8826-E1E17597192F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3E2A13-4633-465E-8826-E1E17597192F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3E2A13-4633-465E-8826-E1E17597192F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AAA0D3-304E-4408-A052-E3E8A8FA2006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AAA0D3-304E-4408-A052-E3E8A8FA2006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AAA0D3-304E-4408-A052-E3E8A8FA2006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AAA0D3-304E-4408-A052-E3E8A8FA2006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC243F0-F4E3-4754-8E21-8BA17E1C1788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC243F0-F4E3-4754-8E21-8BA17E1C1788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC243F0-F4E3-4754-8E21-8BA17E1C1788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC243F0-F4E3-4754-8E21-8BA17E1C1788}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
