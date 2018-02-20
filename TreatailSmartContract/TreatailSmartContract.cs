@@ -13,7 +13,6 @@ namespace TreatailSmartContract
 
         #endregion
 
-
         #region Treatail Token (TTL) Parameters
 
         //Name of the token
@@ -112,7 +111,6 @@ namespace TreatailSmartContract
         {
             return _tokenDecimals;
         }
-
 
         /// <summary>
         /// Returns the name of the token.  This is the name of the asset in NEO-GUI
@@ -270,7 +268,6 @@ namespace TreatailSmartContract
         {
             return Storage.Get(Storage.CurrentContext, string.Concat("D", treatailId.AsString()));
         }
-
 
         /// <summary>
         /// Used to create a Treatail asset and assign the owner
