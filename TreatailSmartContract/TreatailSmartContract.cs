@@ -97,12 +97,12 @@ namespace TreatailSmartContract
         /// <returns>BigInteger - token supply</returns>
         public static BigInteger TotalSupply()
         {
+            BigInteger supply = 0;
             var supplyValue = Storage.Get(Storage.CurrentContext, _tokenTotalSupplyStorageKey);
 
-            if (supplyValue == null || supplyValue.Length == 0)
-                return 0;
+            if (supplyValue != null && supplyValue.Length > 0)
+                supply = supplyValue.AsBigInteger();
 
-            BigInteger supply = supplyValue.AsBigInteger();
             return supply;
         }
 
@@ -113,9 +113,9 @@ namespace TreatailSmartContract
         /// <returns></returns>
         public static BigInteger BalanceOf(byte[] address)
         {
+            BigInteger balance = 0;
             var balanceValue = Storage.Get(Storage.CurrentContext, address);
 
-            BigInteger balance = 0;
             if (balanceValue != null && balanceValue.Length > 0)
                 balance = balanceValue.AsBigInteger();
 
