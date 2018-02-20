@@ -3,27 +3,28 @@ using Neo.SmartContract.Framework.Services.Neo;
 using System;
 using System.Numerics;
 
-namespace TreatailSmartContract
+namespace Treatail.NEO.TreatailSmartContract
 {
-    public class TreatailSmartContract : SmartContract
+    public class Treatail : SmartContract
     {
         #region General Parameters
-
-        private static readonly byte[] _treatailAddress = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y".ToScriptHash();
-
+        
+        //Storage key to store the treatail account
+        private const string _treatailAccountStorageKey = "treatail_account";
+        
         #endregion
 
 
         #region Treatail Token (TTL) Parameters
 
         //Name of the token
-        private const string _tokenName = "TretailToken";
+        private static string _tokenName = "TTL";
 
         //Symbol for the token
-        private const string _tokenSymbol = "TTL";
+        private static string _tokenSymbol = "TTL";
 
         //Decimal precision for the token
-        private const byte _tokenDecimals = 8;
+        private static byte _tokenDecimals = 8;
 
         //Storage key used to store the total supply
         private const string _tokenTotalSupplyStorageKey = "ttl_total_supply";
@@ -35,7 +36,7 @@ namespace TreatailSmartContract
 
         #region Treatail Asset (TTA) Parameters
 
-        private const string _createAssetCostStorageKey = "tta_create_cost";
+        private static string _createAssetCostStorageKey = "tta_create_cost";
 
         private const ulong _createAssetCost = 1;
 
@@ -48,7 +49,7 @@ namespace TreatailSmartContract
             {
                 return Name();
             }
-            if (action == "symbol")
+            if(action == "symbol")
             {
                 return Symbol();
             }
@@ -56,47 +57,46 @@ namespace TreatailSmartContract
             {
                 return Decimals();
             }
-            else if (action == "deploy")
+            else if(action == "deploy")
             {
-                return DeployTokens();
+                return DeployTokens((byte[])args[0]);
             }
-            else if (action == "balanceOf")
+            else if(action == "balanceOf")
             {
                 return BalanceOf((byte[])args[0]);
             }
-            else if (action == "totalSupply")
+            else if(action == "totalSupply")
             {
                 return TotalSupply();
             }
-            else if (action == "transfer")
+            else if(action == "transfer")
             {
                 return Transfer((byte[])args[0], (byte[])args[1], (BigInteger)args[2]);
             }
-
+            
             //TTA Actions
-            if (action == "setassetcreatecost")
+            if(action == "setassetcreatecost")
             {
                 return SetAssetCreateCost((BigInteger)args[0]);
             }
-            else if (action == "getactioncreatecost")
+            else if(action == "getactioncreatecost")
             {
                 return GetAssetCreateCost();
             }
-            else if (action == "getassetdetails")
+            else if(action == "getassetdetails")
             {
                 return GetAssetDetails((byte[])args[0]);
             }
-            else if (action == "createasset")
+            else if(action == "createasset")
             {
                 return CreateAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
             }
-            else if (action == "transferasset")
+            else if(action == "transferasset")
             {
                 return TransferAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
             }
 
-
-            Runtime.Notify("Missinf or invalid action");
+            Runtime.Notify("Missing or unknown action.");
             return false;
         }
 
@@ -108,29 +108,19 @@ namespace TreatailSmartContract
         /// Returns the decimals of precision used by the token
         /// </summary>
         /// <returns>byte - decimals used</returns>
-        public static byte Decimals()
-        {
-            return _tokenDecimals;
-        }
-
+        public static byte Decimals() => _tokenDecimals;
 
         /// <summary>
         /// Returns the name of the token.  This is the name of the asset in NEO-GUI
         /// </summary>
         /// <returns>string - name of the token</returns>
-        public static string Name()
-        {
-            return _tokenName;
-        }
+        public static string Name() => _tokenName;
 
         /// <summary>
         /// Returns the abbreviated symbol / ticker of the token.
         /// </summary>
         /// <returns>string - symbol of the token</returns>
-        public static string Symbol()
-        {
-            return _tokenSymbol;
-        }
+        public static string Symbol() => _tokenSymbol;
 
         /// <summary>
         /// Returns the total token supply deployed in the system.
@@ -140,10 +130,12 @@ namespace TreatailSmartContract
         {
             var supplyValue = Storage.Get(Storage.CurrentContext, _tokenTotalSupplyStorageKey);
 
-            if (supplyValue == null || supplyValue.Length == 0)
-                return 0;
+            BigInteger supply = 0;
+            if (supplyValue != null)
+                supply = supplyValue.AsBigInteger();
 
-            BigInteger supply = supplyValue.AsBigInteger();
+            NotifyTTLMessage(false, "Total Supply", new object[] { supply });
+
             return supply;
         }
 
@@ -156,11 +148,11 @@ namespace TreatailSmartContract
         {
             var balanceValue = Storage.Get(Storage.CurrentContext, address);
 
-            BigInteger balance = 0;
-            if (balanceValue != null && balanceValue.Length > 0)
-                balance = balanceValue.AsBigInteger();
+            if (balanceValue == null)
+                return 0;
 
-            Runtime.Notify("Balance", address, balance);
+            var balance = balanceValue.AsBigInteger();
+            Runtime.Notify("TTL","Balance", address, balance);
 
             return balance;
         }
@@ -175,11 +167,11 @@ namespace TreatailSmartContract
         public static bool Transfer(byte[] from, byte[] to, BigInteger amount)
         {
             //Comment out for debug
-            if (!Runtime.CheckWitness(from))
-            {
-                Runtime.Notify("Cannot send, transaction not signed as the sender address.");
-                return false;
-            }
+            //if (!Runtime.CheckWitness(from))
+            //{
+            //    Runtime.Notify("Cannot send, transaction not signed as the sender address.");
+            //    return false;
+            //}
 
             //Let's get the balance of the from account and verify we can do this
             BigInteger fromAccountBalance = BalanceOf(from);
@@ -189,7 +181,7 @@ namespace TreatailSmartContract
 
             if (fromAccountBalance < amount)
             {
-                Runtime.Notify("Cannot transfer.  Insufficient balance in sending account.", from, fromAccountBalance);
+                NotifyTTLMessage(true, "Cannot transfer.  Insufficient balance in sending account.", new object[] { from, fromAccountBalance });
                 return false;
             }
 
@@ -198,7 +190,7 @@ namespace TreatailSmartContract
             Storage.Put(Storage.CurrentContext, to, toAccountBalance + amount);
 
             //Notify the runtime of the transfer
-            Runtime.Notify("Deployed", to, from, amount);
+            NotifyTTLMessage(false, "Transferred", new object[] { from, to, amount });
 
             return true;
         }
@@ -211,21 +203,23 @@ namespace TreatailSmartContract
         /// <param name="originator">byte[] - originator of the request</param>
         /// <param name="supply">BigInteger</param>
         /// <returns></returns>
-        public static bool DeployTokens()
+        public static bool DeployTokens(byte[] address)
         {
             var totalSupply = TotalSupply();
             if (totalSupply > 0)
             {
-                Runtime.Notify("Tokens already deployed.");
+                NotifyTTLMessage(true, "Tokens already deployed.", null);
                 return false;
             }
 
+            //Deploy the full supply of tokens to the first calling account
+            Storage.Put(Storage.CurrentContext, _treatailAccountStorageKey, address);
             Storage.Put(Storage.CurrentContext, _tokenTotalSupplyStorageKey, _tokenMaxSupply);
-            Storage.Put(Storage.CurrentContext, _treatailAddress, _tokenMaxSupply);
+            Storage.Put(Storage.CurrentContext, address, _tokenMaxSupply);
 
             //Let's check the owner address to verify the balance
-            var balance = BalanceOf(_treatailAddress);
-            Runtime.Notify("Deployed", _treatailAddress, balance);
+            var balance = BalanceOf(address);
+            NotifyTTLMessage(false, "Transferred", new object[] { address, balance });
 
             return true;
         }
@@ -238,9 +232,9 @@ namespace TreatailSmartContract
         /// Gets the number of TTL required to create a Treatail Asset
         /// </summary>
         /// <returns>BigInteger - cost in TTL</returns>
-        public static BigInteger GetAssetCreateCost()
+        private static BigInteger GetAssetCreateCost()
         {
-            byte[] costValue = Storage.Get(Storage.CurrentContext, _createAssetCostStorageKey);
+            var costValue = Storage.Get(Storage.CurrentContext, _createAssetCostStorageKey);
 
             if (costValue == null)
                 return _createAssetCost;
@@ -253,11 +247,11 @@ namespace TreatailSmartContract
         /// </summary>
         /// <param name="cost">BigInteger - number of TTL required to create a Treatail Asset</param>
         /// <returns>bool - success</returns>
-        public static bool SetAssetCreateCost(BigInteger cost)
+        private static bool SetAssetCreateCost(BigInteger cost)
         {
             Storage.Put(Storage.CurrentContext, _createAssetCostStorageKey, cost);
 
-            Runtime.Notify("Asset create cost updated", cost);
+            NotifyTTAMessage(false, "Asset create cost updated", new object[] { cost });
             return true;
         }
 
@@ -285,7 +279,7 @@ namespace TreatailSmartContract
             byte[] treatailAsset = GetAssetDetails(treatailId);
             if (treatailAsset != null && treatailAsset.Length > 0)
             {
-                Runtime.Notify("Asset already exists", treatailId);
+                NotifyTTAMessage(true, "Asset already exists", new object[] { treatailId });
                 return false;
             }
 
@@ -295,11 +289,11 @@ namespace TreatailSmartContract
 
             //Create the asset
             Storage.Put(Storage.CurrentContext, string.Concat("D", treatailId.AsString()), assetDetails);
-            Runtime.Notify("Asset created", treatailId);
+            NotifyTTAMessage(false, "Asset created", new object[] { treatailId });
 
             //Set the asset owner
             Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId.AsString()), address);
-            Runtime.Notify("Asset owner updated", treatailId, address);
+            NotifyTTAMessage(false, "Asset owner updated", new object[] { treatailId, address });
 
             return true;
         }
@@ -309,17 +303,18 @@ namespace TreatailSmartContract
         /// </summary>
         /// <param name="address">byte[] - address to charge</param>
         /// <returns>bool - success</returns>
-        public static bool ChargeAssetCreateCost(byte[] address)
+        private static bool ChargeAssetCreateCost(byte[] address)
         {
             BigInteger assetCreateCost = GetAssetCreateCost();
             BigInteger balance = BalanceOf(address);
-            if (balance < assetCreateCost)
+            if(balance < assetCreateCost)
             {
-                Runtime.Notify("Address does not have sufficient TTL to create asset", address, balance);
-                return false;
+                NotifyTTAMessage(true, "Address does not have sufficient TTL to create asset", new object[] { address });
+                return false;           
             }
 
-            return Transfer(address, _treatailAddress, assetCreateCost);
+            byte[] treatailAddress = GetTreatailAddress();
+            return Transfer(address, treatailAddress, assetCreateCost);
         }
 
         /// <summary>
@@ -332,27 +327,55 @@ namespace TreatailSmartContract
         public static bool TransferAsset(byte[] treatailId, byte[] from, byte[] to)
         {
             //Check the caller
-            if (!Runtime.CheckWitness(from))
-            {
-                Runtime.Notify("Transaction not signed with sender account", from);
-                return false;
-            }
+            //if (!Runtime.CheckWitness(from))
+            //{
+            //    NotifyTTAMessage(true, "Transaction not signed with sender account", new object[] { from });
+            //    return false;
+            //}
 
             //Check that they are the owner
             byte[] owner = Storage.Get(Storage.CurrentContext, string.Concat("O", treatailId.AsString()));
             if (owner == null || owner.Length == 0 || owner != from)
             {
-                Runtime.Notify("Sender account is not the owner of this asset", treatailId, from);
+                NotifyTTAMessage(true, "Sender account is not the owner of this asset", new object[] { from });
                 return false;
             }
 
             //Update the asset ownership record
             Storage.Put(Storage.CurrentContext, string.Concat("O", treatailId.AsString()), to);
-            Runtime.Notify("Transferred", treatailId, from, to);
+            NotifyTTAMessage(false, "Transferred", new object[] { treatailId });
             return true;
         }
 
         #endregion
 
+
+        #region Helpers
+
+        private static byte[] GetTreatailAddress()
+        {
+            return Storage.Get(Storage.CurrentContext, _treatailAccountStorageKey);
+        }
+
+        private static void NotifyTTLMessage(bool error, string message, object[] detail)
+        {
+            NotifyMessage("TTL", error, message, detail);
+        }
+
+        private static void NotifyTTAMessage(bool error, string message, object[] detail)
+        {
+            NotifyMessage("TTA", error, message, detail);
+        }
+
+        private static void NotifyMessage(string entityType, bool error, string message, object[] detail)
+        {
+            string status = "Error";
+            if (!error)
+                status = "Info";
+
+            Runtime.Notify(entityType, status, message, detail);
+        }
+
+        #endregion
     }
 }
