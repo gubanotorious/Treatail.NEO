@@ -1,2 +1,2 @@
 # Treatail.NEO
-Treatail Smart Contract(s) for the NEO Blockchain
+Treatail Smart Contract(s) and Middleware for the NEO Blockchain
