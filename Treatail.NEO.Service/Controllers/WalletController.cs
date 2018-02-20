@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Treatail.NEO.Service.Logic;
-using Treatail.NEO.Service.Models;
 
 namespace Treatail.NEO.Service.Controllers
 {

@@ -1,9 +1,4 @@
 ﻿using NeoLux;
-using Neo.Cryptography;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Treatail.NEO.Service.Logic;
 
 namespace Treatail.NEO.Service.Models

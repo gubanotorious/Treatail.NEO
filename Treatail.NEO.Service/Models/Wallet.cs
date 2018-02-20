@@ -2,9 +2,6 @@
 using NeoLux;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Treatail.NEO.Service.Logic;
 
 namespace Treatail.NEO.Service.Models
