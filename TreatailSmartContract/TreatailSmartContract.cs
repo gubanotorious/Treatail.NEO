@@ -7,37 +7,26 @@ namespace TreatailSmartContract
 {
     public class TreatailSmartContract : SmartContract
     {
-        #region General Parameters
-
         private static readonly byte[] _treatailAddress = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y".ToScriptHash();
 
-        #endregion
-
-        #region Treatail Token (TTL) Parameters
-
+        #region Treatail Token (TTL) Specific Parameters
         //Name of the token
         private const string _tokenName = "TretailToken";
-
         //Symbol for the token
         private const string _tokenSymbol = "TTL";
-
         //Decimal precision for the token
         private const byte _tokenDecimals = 8;
-
         //Storage key used to store the total supply
         private const string _tokenTotalSupplyStorageKey = "ttl_total_supply";
-
         //1 bil, account for 8 decimal places
         private const ulong _tokenMaxSupply = 100000000000000000;
-
         #endregion
 
-        #region Treatail Asset (TTA) Parameters
-
+        #region Treatail Asset (TTA) Specific Parameters
+        //Storage key for asset create cost
         private const string _createAssetCostStorageKey = "tta_create_cost";
-
+        //Default asset create cost
         private const ulong _createAssetCost = 1;
-
         #endregion
 
         public static object Main(string action, params object[] args)
@@ -95,16 +84,13 @@ namespace TreatailSmartContract
             }
 
 
-            Runtime.Notify("Missinf or invalid action");
+            Runtime.Notify("Missing or invalid action");
             return false;
         }
 
         #region Treatail Token (TTL) Methods
-
-        #region NEP5 Required Methods
-
         /// <summary>
-        /// Returns the decimals of precision used by the token
+        /// (NEP5 Required) Returns the decimals of precision used by the token
         /// </summary>
         /// <returns>byte - decimals used</returns>
         public static byte Decimals()
@@ -113,7 +99,7 @@ namespace TreatailSmartContract
         }
 
         /// <summary>
-        /// Returns the name of the token.  This is the name of the asset in NEO-GUI
+        /// (NEP5 Required) Returns the name of the token.  This is the name of the asset in NEO-GUI
         /// </summary>
         /// <returns>string - name of the token</returns>
         public static string Name()
@@ -122,7 +108,7 @@ namespace TreatailSmartContract
         }
 
         /// <summary>
-        /// Returns the abbreviated symbol / ticker of the token.
+        /// (NEP5 Required) Returns the abbreviated symbol / ticker of the token.
         /// </summary>
         /// <returns>string - symbol of the token</returns>
         public static string Symbol()
@@ -131,7 +117,7 @@ namespace TreatailSmartContract
         }
 
         /// <summary>
-        /// Returns the total token supply deployed in the system.
+        /// (NEP5 Required) Returns the total token supply deployed in the system.
         /// </summary>
         /// <returns>BigInteger - token supply</returns>
         public static BigInteger TotalSupply()
@@ -146,7 +132,7 @@ namespace TreatailSmartContract
         }
 
         /// <summary>
-        /// Returns the token balance of the account
+        /// (NEP5 Required) Returns the token balance of the account
         /// </summary>
         /// <param name="account">byte[] - account to get balance for</param>
         /// <returns></returns>
@@ -158,13 +144,11 @@ namespace TreatailSmartContract
             if (balanceValue != null && balanceValue.Length > 0)
                 balance = balanceValue.AsBigInteger();
 
-            Runtime.Notify("Balance", address, balance);
-
             return balance;
         }
 
         /// <summary>
-        /// Transfer the specified amount of tokens from one account to another account
+        /// (NEP5 Required) Transfer the specified amount of tokens from one account to another account
         /// </summary>
         /// <param name="from">byte[] - sending address</param>
         /// <param name="to">byte[] - receiving address</param>
@@ -201,8 +185,6 @@ namespace TreatailSmartContract
             return true;
         }
 
-        #endregion
-
         /// <summary>
         /// Deploys the tokens to the admin account
         /// </summary>
@@ -222,16 +204,13 @@ namespace TreatailSmartContract
             Storage.Put(Storage.CurrentContext, _treatailAddress, _tokenMaxSupply);
 
             //Let's check the owner address to verify the balance
-            var balance = BalanceOf(_treatailAddress);
-            Runtime.Notify("Deployed", _treatailAddress, balance);
+            Runtime.Notify("Deployed", _treatailAddress, BalanceOf(_treatailAddress));
 
             return true;
         }
-
         #endregion
 
         #region Treatail Asset (TTA) Methods
-
         /// <summary>
         /// Gets the number of TTL required to create a Treatail Asset
         /// </summary>
@@ -240,6 +219,7 @@ namespace TreatailSmartContract
         {
             byte[] costValue = Storage.Get(Storage.CurrentContext, _createAssetCostStorageKey);
 
+            //If we don't have any pushed updates in storage, use the default
             if (costValue == null)
                 return _createAssetCost;
 
@@ -254,7 +234,6 @@ namespace TreatailSmartContract
         public static bool SetAssetCreateCost(BigInteger cost)
         {
             Storage.Put(Storage.CurrentContext, _createAssetCostStorageKey, cost);
-
             Runtime.Notify("Asset create cost updated", cost);
             return true;
         }
@@ -348,7 +327,6 @@ namespace TreatailSmartContract
             Runtime.Notify("Transferred", treatailId, from, to);
             return true;
         }
-
         #endregion
 
     }
