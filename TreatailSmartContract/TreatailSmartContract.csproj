@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BEC5B4FB-FEA3-42EE-B36F-E5EA94A4A4C5}</ProjectGuid>
+    <ProjectGuid>{0AAD5174-B471-483A-89C4-ED7163B2D455}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Treatail.NEO.TreatailTokenSmartContract</RootNamespace>
-    <AssemblyName>Treatail.NEO.TreatailTokenSmartContract</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <RootNamespace>TreatailSmartContract</RootNamespace>
+    <AssemblyName>TreatailSmartContract</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TreatailTokenSmartContract.cs" />
+    <Compile Include="TreatailSmartContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,8 +63,4 @@
     </Message>
     <ConvertTask DataSource="$(TargetPath)" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>
