@@ -1,18 +1,18 @@
 ﻿using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Treatail.NEO.Core.Models;
-using Treatail.NEO.RestApi.Tests.Logic;
+using Treatail.NEO.WebApi.Tests.Logic;
 
-namespace Treatail.NEO.RestApi.Tests
+namespace Treatail.NEO.WebApi.Tests
 {
     public class WalletTest
     {
         private string _walletServiceBaseUrl;
         private string _apiKey;
 
-        public WalletTest(string walletServiceBaseUrl, string apiKey)
+        public WalletTest(string serviceBaseUrl, string apiKey)
         {
-            _walletServiceBaseUrl = walletServiceBaseUrl;
+            _walletServiceBaseUrl = string.Concat(serviceBaseUrl,"/Wallet");
             _apiKey = apiKey;
         }
 

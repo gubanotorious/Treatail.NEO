@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Treatail.NEO.RestApi.Tests.Logic;
+using Treatail.NEO.WebApi.Tests.Logic;
 using Treatail.NEO.WebApi.Tests.Models;
 
-namespace Treatail.NEO.RestApi.Tests
+namespace Treatail.NEO.WebApi.Tests
 {
     public class AssetTest
     {
@@ -15,9 +11,9 @@ namespace Treatail.NEO.RestApi.Tests
         private string _apiKey;
         private string _privateKeyHex;
 
-        public AssetTest(string assetServiceBaseUrl, string apiKey, string privateKeyHex)
+        public AssetTest(string serviceBaseUrl, string apiKey, string privateKeyHex)
         {
-            _assetServiceBaseUrl = assetServiceBaseUrl;
+            _assetServiceBaseUrl = string.Concat(serviceBaseUrl,"/Asset");
             _apiKey = apiKey;
             _privateKeyHex = privateKeyHex;
         }

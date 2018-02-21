@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Threading.Tasks;
-using Treatail.NEO.RestApi.Tests.Logic;
-using Treatail.NEO.RestApi.Tests.Models;
-using Treatail.NEO.RestApi.Tests.Logic;
+using Treatail.NEO.WebApi.Tests.Logic;
+using Treatail.NEO.WebApi.Tests.Models;
 
-namespace Treatail.NEO.RestApi.Tests
+namespace Treatail.NEO.WebApi.Tests
 {
     public class TokenTest
     {
@@ -12,9 +11,9 @@ namespace Treatail.NEO.RestApi.Tests
         private string _apiKey;
         private string _privateKeyHex;
 
-        public TokenTest(string tokenServiceBaseUrl, string apiKey, string privateKeyHex)
+        public TokenTest(string serviceBaseUrl, string apiKey, string privateKeyHex)
         {
-            _tokenServiceBaseUrl = tokenServiceBaseUrl;
+            _tokenServiceBaseUrl = string.Concat(serviceBaseUrl,"/Token");
             _apiKey = apiKey;
             _privateKeyHex = privateKeyHex;
         }

@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Treatail.NEO.RestApi.Tests.Logic
+namespace Treatail.NEO.WebApi.Tests.Logic
 {
     public enum ServiceAction
     {

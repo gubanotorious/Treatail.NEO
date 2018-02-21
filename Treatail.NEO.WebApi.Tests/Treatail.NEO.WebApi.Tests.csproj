@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetTest.cs" />
-    <Compile Include="Logic\ServiceHelper.cs" />
+    <Compile Include="Logic\ServicesHelper.cs" />
     <Compile Include="Models\AssetCreateRequest.cs" />
     <Compile Include="Models\AssetTransferRequest.cs" />
     <Compile Include="Models\TokenTransferRequest.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Treatail.NEO.RestApi.Tests.Models
+namespace Treatail.NEO.WebApi.Tests.Models
 {
     [Serializable]
     public class TokenTransferRequest
