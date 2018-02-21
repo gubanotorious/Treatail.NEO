@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.WebApi.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.WebApi", "Treatail.NEO.WebApi\Treatail.NEO.WebApi.csproj", "{275FF9D8-3C89-479F-A866-9A3992DBC2ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.TestHarness", "Treatail.NEO.TestHarness\Treatail.NEO.TestHarness.csproj", "{0B6438E3-11C5-4460-AC04-CB770905B378}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6438E3-11C5-4460-AC04-CB770905B378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6438E3-11C5-4460-AC04-CB770905B378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6438E3-11C5-4460-AC04-CB770905B378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6438E3-11C5-4460-AC04-CB770905B378}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
