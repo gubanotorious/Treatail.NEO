@@ -59,7 +59,7 @@ namespace Treatail.NEO.SmartContracts.TreatailContract
             else if (action == "getassetdetails")
                 return GetAssetDetails((byte[])args[0]);
             else if (action == "createasset")
-                return CreateAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
+                return CreateAsset((byte[])args[0], (byte[])args[1], (byte[])args[2], (bool)args[3]);
             else if (action == "transferasset")
                 return TransferAsset((byte[])args[0], (byte[])args[1], (byte[])args[2]);
 
@@ -254,7 +254,7 @@ namespace Treatail.NEO.SmartContracts.TreatailContract
         /// <param name="address">byte[] - address of the Treatail Asset owner</param>
         /// <param name="assetDetails">byte[] - Treatail Asset details payload</param>
         /// <returns></returns>
-        public static bool CreateAsset(byte[] treatailId, byte[] address, byte[] assetDetails)
+        public static bool CreateAsset(byte[] treatailId, byte[] address, byte[] assetDetails, bool chargeForCreate)
         {
             //Treatail needs to create the assets
             if (!Runtime.CheckWitness(_treatailAddress))
@@ -271,9 +271,12 @@ namespace Treatail.NEO.SmartContracts.TreatailContract
                 return false;
             }
 
-            //Charge the account for the TTL for the transaction
-            if (!ChargeAssetCreateCost(address))
-                return false;
+            if (chargeForCreate)
+            {
+                //Charge the account for the TTL for the transaction
+                if (!ChargeAssetCreateCost(address))
+                    return false;
+            }
 
             //Create the asset
             Storage.Put(Storage.CurrentContext, string.Concat(_assetStorageDetailPrefix, treatailId.AsString()), assetDetails);

@@ -1,4 +1,5 @@
 ﻿using NeoLux;
+using System;
 using Treatail.NEO.Service.Logic;
 
 namespace Treatail.NEO.Service.Models
@@ -19,8 +20,8 @@ namespace Treatail.NEO.Service.Models
         public Contract(NetworkType networkType, string privateKeyHex)
         {
             _api = NetworkHelper.GetNeoRPCForType(networkType);
-            _token = _api.GetToken("TTL");
             _contextWallet = WalletHelper.GetWallet(privateKeyHex);
+            _token = _api.GetToken("TTL");
         }
 
         /// <summary>
@@ -107,9 +108,9 @@ namespace Treatail.NEO.Service.Models
         /// <param name="address">byte[]</param>
         /// <param name="assetDetails"></param>
         /// <returns></returns>
-        public bool CreateAsset(byte[] treatailId, byte[] address, byte[] assetDetails)
+        public bool CreateAsset(byte[] treatailId, byte[] address, byte[] assetDetails, bool chargeTTL)
         {
-            return _api.CallContract(_contextWallet.GetKeys(), _treatailContractScriptHash, "createasset", new object[] { treatailId, address, assetDetails });
+            return _api.CallContract(_contextWallet.GetKeys(), _treatailContractScriptHash, "createasset", new object[] { treatailId, address, assetDetails, chargeTTL });
         }
 
         /// <summary>

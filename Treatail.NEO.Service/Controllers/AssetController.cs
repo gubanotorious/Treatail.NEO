@@ -16,10 +16,10 @@ namespace Treatail.NEO.Service.Controllers
         /// <param name="ownerAddress">string - the address to assign ownership to</param>
         /// <param name="assetDetails">string - the payload containing the details of the asset</param>
         /// <returns></returns>
-        public bool Create(string privateKeyHex, string treatailAssetId, string ownerAddress, string assetDetails)
+        public bool Create(string privateKeyHex, string treatailAssetId, string ownerAddress, string assetDetails, bool chargeTTL)
         {
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);
-            return contract.CreateAsset(ConversionHelper.HexToBytes(treatailAssetId), ConversionHelper.HexToBytes(ownerAddress), ConversionHelper.HexToBytes(assetDetails));
+            return contract.CreateAsset(ConversionHelper.HexToBytes(treatailAssetId), ConversionHelper.HexToBytes(ownerAddress), ConversionHelper.HexToBytes(assetDetails), chargeTTL);
         }
 
         /// <summary>
