@@ -1,5 +1,6 @@
 ﻿using Treatail.NEO.Service.Logic;
 using Treatail.NEO.Service.Models;
+using System.Web.Http;
 
 namespace Treatail.NEO.Service.Controllers
 {
@@ -16,6 +17,7 @@ namespace Treatail.NEO.Service.Controllers
         /// <param name="ownerAddress">string - the address to assign ownership to</param>
         /// <param name="assetDetails">string - the payload containing the details of the asset</param>
         /// <returns></returns>
+        [HttpPost]
         public bool Create(string privateKeyHex, string treatailAssetId, string ownerAddress, string assetDetails, bool chargeTTL)
         {
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);
@@ -54,6 +56,7 @@ namespace Treatail.NEO.Service.Controllers
         /// <param name="fromAddress">string - the address to send the asset from</param>
         /// <param name="toAddress">string - the address to send the asset to</param>
         /// <returns></returns>
+        [HttpPost]
         public bool TransferAsset(string privateKeyHex, string treatailAssetId, string fromAddress, string toAddress)
         {
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);

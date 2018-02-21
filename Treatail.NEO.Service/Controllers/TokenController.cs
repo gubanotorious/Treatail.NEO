@@ -1,4 +1,5 @@
-﻿using Treatail.NEO.Service.Logic;
+﻿using System.Web.Http;
+using Treatail.NEO.Service.Logic;
 using Treatail.NEO.Service.Models;
 
 namespace Treatail.NEO.Service.Controllers
@@ -27,6 +28,7 @@ namespace Treatail.NEO.Service.Controllers
         /// <param name="toAddress">string - address to send the TTL to</param>
         /// <param name="amount">decimal - the amount to send</param>
         /// <returns>bool - success</returns>
+        [HttpPost]
         public bool Transfer(string privateKeyHex, string fromAddress, string toAddress, decimal amount)
         {
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);
