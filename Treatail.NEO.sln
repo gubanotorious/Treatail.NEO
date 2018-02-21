@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.Service", "Treatail.NEO.Service\Treatail.NEO.Service.csproj", "{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.SmartContracts.TreatailContract", "Treatail.NEO.SmartContracts.TreatailContract\Treatail.NEO.SmartContracts.TreatailContract.csproj", "{C40C4D9A-8617-4539-AADD-BC26065FAA54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.Core", "Treatail.NEO.Core\Treatail.NEO.Core.csproj", "{9347F9BF-D2E0-47E1-A19E-CFFA909311C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.SmartContracts.TreatailContract.Tests", "Treatail.NEO.SmartContracts.TreatailContract.Tests\Treatail.NEO.SmartContracts.TreatailContract.Tests.csproj", "{AB9FE65A-2FD0-433E-92C4-F63978623271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.WebApi.Tests", "Treatail.NEO.WebApi.Tests\Treatail.NEO.WebApi.Tests.csproj", "{0CE459FB-62FF-41D2-84B3-5CBF4CA426F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treatail.NEO.WebApi", "Treatail.NEO.WebApi\Treatail.NEO.WebApi.csproj", "{275FF9D8-3C89-479F-A866-9A3992DBC2ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F087D0F-9CB6-4B86-882F-82DBFAE647D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C40C4D9A-8617-4539-AADD-BC26065FAA54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9347F9BF-D2E0-47E1-A19E-CFFA909311C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9347F9BF-D2E0-47E1-A19E-CFFA909311C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9347F9BF-D2E0-47E1-A19E-CFFA909311C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9347F9BF-D2E0-47E1-A19E-CFFA909311C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB9FE65A-2FD0-433E-92C4-F63978623271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9FE65A-2FD0-433E-92C4-F63978623271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9FE65A-2FD0-433E-92C4-F63978623271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9FE65A-2FD0-433E-92C4-F63978623271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE459FB-62FF-41D2-84B3-5CBF4CA426F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE459FB-62FF-41D2-84B3-5CBF4CA426F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE459FB-62FF-41D2-84B3-5CBF4CA426F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE459FB-62FF-41D2-84B3-5CBF4CA426F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{275FF9D8-3C89-479F-A866-9A3992DBC2ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
