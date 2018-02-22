@@ -10,10 +10,10 @@ namespace Treatail.NEO.Core.Models
     /// </summary>
     public class Contract
     {
-        private static string _contractScriptHash = "e15a3b08b56fbcae28391bb1547d303febccda55";
-        private static string _tokenSymbol = "TTL";
+        private static string _contractScriptHash = "beea17e57b7e3fef4b36963502c8bf94d6f86ae3";
         private NeoRPC _api;
         private Wallet _contextWallet;
+        private NEP5 _token;
 
         /// <summary>
         /// Facilitates the invoking of the Treatail Smart Contract
@@ -23,7 +23,8 @@ namespace Treatail.NEO.Core.Models
         public Contract(NetworkType networkType, string privateKeyHex)
         {
             _api = NetworkHelper.GetNeoRPCForType(networkType);
-            if(privateKeyHex != null)
+            _token = new NEP5(_api, _contractScriptHash);
+            if (privateKeyHex != null)
                 _contextWallet = WalletHelper.GetWallet(privateKeyHex);
         }
 
@@ -32,33 +33,31 @@ namespace Treatail.NEO.Core.Models
         /// </summary>
         /// <param name="address">Address to get the balance of</param>
         /// <returns>Balance of tokens for the specified address</returns>
-        public decimal GetTokensBalance(string address)
+        public decimal GetTokenBalance()
         {
-            //return _token.BalanceOf(ConversionHelper.StringToBytes(address));
-            var response = _api.TestInvokeScript(_contractScriptHash, "balanceOf", new object[] {
-                ConversionHelper.StringToBytes(address) });
-
-            byte[] res = (byte[])response.result;
-            if (res.Length == 0)
-                return 0;
-
-            return BitConverter.ToInt32(res, 0);
+            return _token.BalanceOf(_contextWallet.Address);
         }
 
         /// <summary>
-        /// Transfers TTL from a wallet to a destination address
+        /// Transfers TTL from the context wallet to a destination address
         /// </summary>
-        /// <param name="from">The address TTL should be sent from</param>
         /// <param name="toAddress">The destination address to send TTL to</param>
         /// <param name="amount">The amount to be sent</param>
-        /// <returns></returns>
-        public bool TransferTokens(string fromAddress, string toAddress, int amount)
+        /// <returns>Success</returns>
+        public bool TransferTokens(string fromAddress, string toAddress, decimal value)
         {
-            return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash, "transfer", new object[] {
-                    ConversionHelper.StringToBytes(fromAddress),
-                    ConversionHelper.StringToBytes(toAddress),
-                    BitConverter.GetBytes(amount)
-             });
+            var decs = _token.Decimals;
+            while (decs > 0)
+            {
+                value *= 10;
+                decs--;
+            }
+
+            BigInteger amount = new BigInteger((ulong)value);
+            var sender_address_hash = fromAddress.GetScriptHashFromAddress();
+            var to_address_hash = toAddress.GetScriptHashFromAddress();
+            var response = _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash, "transfer", new object[] { sender_address_hash, to_address_hash, amount });
+            return response;
         }
 
         /// <summary>
@@ -66,10 +65,9 @@ namespace Treatail.NEO.Core.Models
         /// </summary>
         /// <param name="cost">Number of TTL required</param>
         /// <returns>Success</returns>
-        public bool SetAssetCreateCost(int cost)
+        public bool SetAssetCreateCost(BigInteger cost)
         {
-            return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash,  "setassetcreatecost", new object[] {
-                new BigInteger(cost) });
+            return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash,  "setassetcreatecost", new object[] { cost });
         }
 
         /// <summary>
@@ -79,8 +77,7 @@ namespace Treatail.NEO.Core.Models
         public BigInteger GetAssetCreateCost()
         {
             var response = _api.TestInvokeScript(_contractScriptHash, "getassetcreatecost", new object[] { 0 });
-            byte[] res = (byte[])response.result;
-            return new BigInteger(res);
+            return (BigInteger)response.result;
         }
 
         /// <summary>
@@ -93,7 +90,7 @@ namespace Treatail.NEO.Core.Models
             var response = _api.TestInvokeScript(_contractScriptHash, "getassetowner", new object[] {
                 ConversionHelper.StringToBytes(treatailId) });
 
-            return ConversionHelper.BytesToString((byte[])response.result);
+            return ((byte[])response.result).ToHexString();
         }
 
         /// <summary>
@@ -121,7 +118,7 @@ namespace Treatail.NEO.Core.Models
         {
             return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash, "createasset", new object[] {
                 ConversionHelper.StringToBytes(treatailId),
-                ConversionHelper.StringToBytes(address),
+                address.GetScriptHashFromAddress(),
                 ConversionHelper.StringToBytes(assetDetails),
                 BitConverter.GetBytes(chargeTTL)
             });
@@ -138,10 +135,9 @@ namespace Treatail.NEO.Core.Models
         {
             return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash, "transferasset", new object[] {
                 ConversionHelper.StringToBytes(treatailId),
-                ConversionHelper.StringToBytes(fromAddress),
-                ConversionHelper.StringToBytes(toAddress)
+                fromAddress.GetScriptHashFromAddress(),
+                toAddress.GetScriptHashFromAddress()
             });
         }
-       
     }
 }

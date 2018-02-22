@@ -40,5 +40,12 @@ namespace Treatail.NEO.WebApi.Tests
             var result = ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(new { privateKeyHex=privateKeyHex }));
             return JsonConvert.DeserializeObject<decimal>(result);
         }
+
+        public decimal GetTTLBalance(string privateKeyHex)
+        {
+            var url = string.Format("{0}/GetTTLBalance", _walletServiceBaseUrl);
+            var result = ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(new { privateKeyHex=privateKeyHex }));
+            return JsonConvert.DeserializeObject<decimal>(result);
+        }
     }
 }

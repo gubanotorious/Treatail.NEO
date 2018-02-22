@@ -17,17 +17,6 @@ namespace Treatail.NEO.WebApi.Controllers
         }
 
         /// <summary>
-        /// Get the balance of TTL in a specified address
-        /// </summary>
-        /// <param name="id">Address to get the balance for</param>
-        /// <returns>The requested balance</returns>
-        public ActionResult GetBalance(string id)
-        {
-            Contract contract = new Contract(CurrentNetwork, null);
-            return Json(contract.GetTokensBalance(id),JsonRequestBehavior.AllowGet);
-        }
-
-        /// <summary>
         /// Transfers TTL from one address to another
         /// </summary>
         /// <param name="privateKeyHex">The private key used for the signer of the transaction</param>

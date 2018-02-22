@@ -18,12 +18,7 @@ namespace Treatail.NEO.WebApi.Tests
             _privateKeyHex = privateKeyHex;
         }
 
-        public decimal GetBalance(string address)
-        {
-            var url = string.Format("{0}/GetBalance/{1}", _tokenServiceBaseUrl, address);
-            var result = ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, null);
-            return JsonConvert.DeserializeObject<decimal>(result);
-        }
+
 
         public bool Transfer(string fromAddress, string toAddress, int amount)
         {

@@ -56,7 +56,7 @@ namespace Treatail.NEO.WebApi.Controllers
         {
             var wallet = WalletHelper.GetWallet(privateKeyHex);
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);
-            return Json(contract.GetTokensBalance(wallet.Address));
+            return Json(contract.GetTokenBalance());
         }
     }
 }
