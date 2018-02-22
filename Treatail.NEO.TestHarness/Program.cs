@@ -26,7 +26,7 @@ namespace Treatail.NEO.TestHarness
             ContractTest.Run(_privateKeyHex, _address, _address2);
 
             //Run the WebApi middleware tests
-            WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
+            //WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
 
             Console.WriteLine("Press any key");
             Console.Read();

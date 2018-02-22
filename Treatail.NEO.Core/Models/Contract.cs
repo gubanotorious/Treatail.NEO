@@ -13,7 +13,6 @@ namespace Treatail.NEO.Core.Models
         private static string _contractScriptHash = "e15a3b08b56fbcae28391bb1547d303febccda55";
         private static string _tokenSymbol = "TTL";
         private NeoRPC _api;
-        private NEP5 _token;
         private Wallet _contextWallet;
 
         /// <summary>
@@ -24,7 +23,6 @@ namespace Treatail.NEO.Core.Models
         public Contract(NetworkType networkType, string privateKeyHex)
         {
             _api = NetworkHelper.GetNeoRPCForType(networkType);
-            _token = _api.GetToken("TTL");
             if(privateKeyHex != null)
                 _contextWallet = WalletHelper.GetWallet(privateKeyHex);
         }
@@ -71,7 +69,7 @@ namespace Treatail.NEO.Core.Models
         public bool SetAssetCreateCost(int cost)
         {
             return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash,  "setassetcreatecost", new object[] {
-                BitConverter.GetBytes(cost) });
+                new BigInteger(cost) });
         }
 
         /// <summary>
