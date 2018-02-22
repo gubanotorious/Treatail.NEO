@@ -37,7 +37,8 @@ namespace Treatail.NEO.Core.Models
         public decimal GetTokensBalance(string address)
         {
             //return _token.BalanceOf(ConversionHelper.StringToBytes(address));
-            var response = _api.TestInvokeScript(_contractScriptHash, "balanceOf", new object[] { ConversionHelper.StringToBytes(address) });
+            var response = _api.TestInvokeScript(_contractScriptHash, "balanceOf", new object[] {
+                ConversionHelper.StringToBytes(address) });
 
             byte[] res = (byte[])response.result;
             if (res.Length == 0)
@@ -69,7 +70,8 @@ namespace Treatail.NEO.Core.Models
         /// <returns>Success</returns>
         public bool SetAssetCreateCost(int cost)
         {
-            return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash,  "setassetcreatecost", new object[] { BitConverter.GetBytes(cost) });
+            return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash,  "setassetcreatecost", new object[] {
+                BitConverter.GetBytes(cost) });
         }
 
         /// <summary>
@@ -90,7 +92,9 @@ namespace Treatail.NEO.Core.Models
         /// <returns>Address of the asset owner</returns>
         public string GetAssetOwner(string treatailId)
         {
-            var response = _api.TestInvokeScript(_contractScriptHash, "getassetowner", new object[] { ConversionHelper.StringToBytes(treatailId) });
+            var response = _api.TestInvokeScript(_contractScriptHash, "getassetowner", new object[] {
+                ConversionHelper.StringToBytes(treatailId) });
+
             return ConversionHelper.BytesToString((byte[])response.result);
         }
 
@@ -101,7 +105,9 @@ namespace Treatail.NEO.Core.Models
         /// <returns>Asset details</returns>
         public string GetAssetDetails(string treatailId)
         {
-            var response = _api.TestInvokeScript(_contractScriptHash, "getassetdetails", new object[] { ConversionHelper.StringToBytes(treatailId) });
+            var response = _api.TestInvokeScript(_contractScriptHash, "getassetdetails", new object[] {
+                ConversionHelper.StringToBytes(treatailId) });
+
             return ConversionHelper.BytesToString((byte[])response.result);
         }
 

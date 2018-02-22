@@ -25,8 +25,8 @@ namespace Treatail.NEO.TestHarness
             //Run the contract tests via Lux
             ContractTest.Run(_privateKeyHex, _address, _address2);
 
-            //Run the tests via the WebApi
-            //WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
+            //Run the WebApi middleware tests
+            WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
 
             Console.WriteLine("Press any key");
             Console.Read();
