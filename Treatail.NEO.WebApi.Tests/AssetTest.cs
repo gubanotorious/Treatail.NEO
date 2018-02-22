@@ -18,7 +18,7 @@ namespace Treatail.NEO.WebApi.Tests
             _privateKeyHex = privateKeyHex;
         }
 
-        public async Task<bool> Create(string treatailAssetId, string ownerAddress, string assetDetails, bool chargeTTL)
+        public bool Create(string treatailAssetId, string ownerAddress, string assetDetails, bool chargeTTL)
         {
             var createRequest = new AssetCreateRequest
             {
@@ -30,25 +30,25 @@ namespace Treatail.NEO.WebApi.Tests
             };
 
             var url = string.Format("{0}/Create", _assetServiceBaseUrl);
-            var result = await ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(createRequest));
+            var result = ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(createRequest));
             return JsonConvert.DeserializeObject<bool>(result);
         }
 
-        public async Task<string> GetDetail(string treatailAssetId)
+        public string GetDetail(string treatailAssetId)
         {
-            var url = string.Format("{0}/GetDetails/{1}", _assetServiceBaseUrl, treatailAssetId);
-            var result = await ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, null);
+            var url = string.Format("{0}/GetDetail/{1}", _assetServiceBaseUrl, treatailAssetId);
+            var result = ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, null);
             return JsonConvert.DeserializeObject<string>(result);
         }
 
-        public async Task<string> GetOwner(string treatailAssetId)
+        public string GetOwner(string treatailAssetId)
         {
             var url = string.Format("{0}/GetOwner/{1}", _assetServiceBaseUrl, treatailAssetId);
-            var result = await ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, null);
+            var result = ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, null);
             return JsonConvert.DeserializeObject<string>(result);
         }
 
-        public async Task<bool> Transfer(string treatailAssetId, string fromAddress, string toAddress)
+        public bool Transfer(string treatailAssetId, string fromAddress, string toAddress)
         {
             var transferRequest = new AssetTransferRequest
             {
@@ -59,7 +59,7 @@ namespace Treatail.NEO.WebApi.Tests
             };
 
             var url = string.Format("{0}/Transfer", _assetServiceBaseUrl);
-            var result = await ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(transferRequest));
+            var result = ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(transferRequest));
             return JsonConvert.DeserializeObject<bool>(result);
         }
     }

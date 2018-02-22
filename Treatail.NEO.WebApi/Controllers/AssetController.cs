@@ -10,72 +10,63 @@ namespace Treatail.NEO.WebApi.Controllers
     /// </summary>
     public class AssetController : BaseController
     {
+        public AssetController() : base()
+        {
+
+        }
+
         /// <summary>
         /// Create a Treatail Asset
         /// </summary>
-        /// <param name="privateKeyHex">string - the private key of the signing wallet for the tranasction</param>
-        /// <param name="treatailAssetId">string - the Treatail Asset identifier to be created</param>
-        /// <param name="ownerAddress">string - the address to assign ownership to</param>
-        /// <param name="assetDetails">string - the payload containing the details of the asset</param>
+        /// <param name="privateKeyHex">The private key of the signing wallet for the tranasction</param>
+        /// <param name="treatailAssetId">Treatail Asset identifier to be created</param>
+        /// <param name="ownerAddress">Address to assign ownership to</param>
+        /// <param name="assetDetails">Details of the asset</param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult Create(string privateKeyHex, string treatailAssetId, string ownerAddress, string assetDetails, bool chargeTTL)
         {
-            //Check the API key since we're writing and there's a cost associated with it
-            if (!ApiHelper.CheckApiKey(Request))
-                return Content("Invalid API Key");
-
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);
-            return Json(contract.CreateAsset(ConversionHelper.HexToBytes(treatailAssetId), ConversionHelper.HexToBytes(ownerAddress), ConversionHelper.HexToBytes(assetDetails), chargeTTL));
+            return Json(contract.CreateAsset(treatailAssetId, ownerAddress, assetDetails, chargeTTL));
         }
 
         /// <summary>
         /// Returns the details payload about the requested Treatail Asset
         /// </summary>
-        /// <param name="id">string - Treatail Asset identifier</param>
-        /// <returns>string - payload containing the details about the asset</returns>
+        /// <param name="id">Treatail Asset identifier</param>
+        /// <returns>Details of the asset</returns>
         public ActionResult GetDetail(string id)
         {
-            if (!ApiHelper.CheckApiKey(Request))
-                return Content("Invalid API Key");
-
             Contract contract = new Contract(CurrentNetwork, null);
-            byte[] details = contract.GetAssetDetails(ConversionHelper.HexToBytes(id));
+            byte[] details = contract.GetAssetDetails(id);
             return Json(ConversionHelper.BytesToHex(details), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// Returns the address of the owner of the specified asset
         /// </summary>
-        /// <param name="id">string - Treatail Asset identifier</param>
-        /// <returns>string - payload containing the details about the asset</returns>
+        /// <param name="id">Treatail Asset identifier</param>
+        /// <returns>Details of the asset</returns>
         public ActionResult GetOwner(string id)
         {
-            if (!ApiHelper.CheckApiKey(Request))
-                return Content("Invalid API Key");
-
             Contract contract = new Contract(CurrentNetwork, null);
-            byte[] details = contract.GetAssetOwner(ConversionHelper.HexToBytes(id));
+            byte[] details = contract.GetAssetOwner(id);
             return Json(ConversionHelper.BytesToHex(details), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// Transfers a Treatail Asset from one address to another
         /// </summary>
-        /// <param name="privateKeyHex">string - the private key signing the transaction</param>
-        /// <param name="treatailAssetId">string - the Treatail Asset identifier</param>
-        /// <param name="fromAddress">string - the address to send the asset from</param>
-        /// <param name="toAddress">string - the address to send the asset to</param>
+        /// <param name="privateKeyHex">Private key signing the transaction</param>
+        /// <param name="treatailAssetId">Treatail Asset identifier</param>
+        /// <param name="fromAddress">Address to send the asset from</param>
+        /// <param name="toAddress">Address to send the asset to</param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult Transfer(string privateKeyHex, string treatailAssetId, string fromAddress, string toAddress)
         {
-            //Check the API key since we're writing and there's a cost associated with it
-            if (!ApiHelper.CheckApiKey(Request))
-                return Content("Invalid API Key");
-
             Contract contract = new Contract(CurrentNetwork, privateKeyHex);
-            return Json(contract.TransferAsset(ConversionHelper.HexToBytes(treatailAssetId), ConversionHelper.HexToBytes(fromAddress), ConversionHelper.HexToBytes(toAddress)));
+            return Json(contract.TransferAsset(treatailAssetId, fromAddress, toAddress));
         }
     }
 }

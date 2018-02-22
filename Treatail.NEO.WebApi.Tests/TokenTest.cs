@@ -18,14 +18,14 @@ namespace Treatail.NEO.WebApi.Tests
             _privateKeyHex = privateKeyHex;
         }
 
-        public async Task<decimal> GetBalance(string address)
+        public decimal GetBalance(string address)
         {
             var url = string.Format("{0}/GetBalance/{1}", _tokenServiceBaseUrl, address);
-            var result = await ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, JsonConvert.SerializeObject(address));
+            var result = ServicesHelper.CallService(ServiceAction.GET, _apiKey, url, null);
             return JsonConvert.DeserializeObject<decimal>(result);
         }
 
-        public async Task<bool> Transfer(string fromAddress, string toAddress, decimal amount)
+        public bool Transfer(string fromAddress, string toAddress, int amount)
         {
             var transferRequest = new TokenTransferRequest
             {
@@ -36,7 +36,7 @@ namespace Treatail.NEO.WebApi.Tests
             };
 
             var url = string.Format("{0}/Transfer", _tokenServiceBaseUrl);
-            var result = await ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(transferRequest));
+            var result = ServicesHelper.CallService(ServiceAction.POST, _apiKey, url, JsonConvert.SerializeObject(transferRequest));
             return JsonConvert.DeserializeObject<bool>(result);
         }
     }

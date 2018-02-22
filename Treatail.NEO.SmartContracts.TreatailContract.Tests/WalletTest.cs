@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Treatail.NEO.Core.Logic;
+using Treatail.NEO.Core.Models;
 
 namespace Treatail.NEO.Tests
 {
@@ -17,6 +18,18 @@ namespace Treatail.NEO.Tests
                 return false;
 
             return true;
+        }
+
+        public decimal GetNEOBalance(NetworkType network, string privateKeyHex)
+        {
+            var wallet = WalletHelper.GetWallet(privateKeyHex);
+            return wallet.GetBalance(network, WalletBalanceType.NEO);
+        }
+
+        public decimal GetGASBalance(NetworkType network, string privateKeyHex)
+        {
+            var wallet = WalletHelper.GetWallet(privateKeyHex);
+            return wallet.GetBalance(network, WalletBalanceType.GAS);
         }
     }
 }

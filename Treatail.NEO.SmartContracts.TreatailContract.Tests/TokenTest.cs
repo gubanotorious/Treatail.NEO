@@ -29,7 +29,7 @@ namespace Treatail.NEO.Tests
                 return false;
             }
 
-            Console.WriteLine("Token verified");
+            Console.WriteLine("Token found");
             return true;
         }
 
@@ -42,13 +42,13 @@ namespace Treatail.NEO.Tests
         public decimal GetBalance(string address)
         {
             Contract contract = new Contract(NetworkType.Testnet, _privateKeyHex);
-            return contract.GetTokensBalance(ConversionHelper.HexToBytes(address));
+            return contract.GetTokensBalance(address);
         }
 
-        public bool Transfer(string fromAddress, string toAddress, decimal amount)
+        public bool Transfer(string fromAddress, string toAddress, int amount)
         {
             Contract contract = new Contract(NetworkType.Testnet, _privateKeyHex);
-            return contract.TransferTokens(ConversionHelper.HexToBytes(fromAddress), ConversionHelper.HexToBytes(toAddress), amount);
+            return contract.TransferTokens(fromAddress, toAddress, amount);
         }
     }
 }

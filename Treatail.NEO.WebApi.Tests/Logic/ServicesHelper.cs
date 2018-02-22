@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -9,48 +10,32 @@ namespace Treatail.NEO.WebApi.Tests.Logic
     public enum ServiceAction
     {
         GET,
-        POST,
-        PUT
+        POST
     }
 
     public static class ServicesHelper
     {
-        public static async Task<string> CallService(ServiceAction action, string apiKey, string url, string jsonContent)
+        public static string CallService(ServiceAction action, string apiKey, string url, string jsonContent)
         {
-            string responseString = null;
-            using (HttpClient httpClient = new HttpClient())
+            using (var client = new WebClient { Encoding = System.Text.Encoding.UTF8 })
             {
-                try
-                {
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    if (!String.IsNullOrEmpty(apiKey))
-                        httpClient.DefaultRequestHeaders.Add(apiKey, apiKey);
-                }
-                catch (Exception ex)
-                {
-                    var m = ex.Message;
-                }
+                //Set the content type header
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
 
-                HttpResponseMessage httpResponse = null;
+                if (!String.IsNullOrEmpty(apiKey))
+                    client.Headers.Add(apiKey, apiKey);
+
                 if (action == ServiceAction.GET)
-                    httpResponse = await httpClient.GetAsync(url);
+                    return client.DownloadString(url);
                 else if (action == ServiceAction.POST)
                 {
                     if (jsonContent == null)
-                        jsonContent = String.Empty;
+                        jsonContent = "{}";
 
-                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                    httpResponse = await httpClient.PostAsync(url, content);
+                    return client.UploadString(url, jsonContent);
                 }
-
-                httpResponse.EnsureSuccessStatusCode();
-                responseString = await httpResponse.Content.ReadAsStringAsync();
             }
-
-            if (String.IsNullOrEmpty(responseString))
-                throw new Exception("Response was empty");
-
-            return responseString;
+            return null;
         }
     }
 }

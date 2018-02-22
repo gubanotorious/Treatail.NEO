@@ -16,12 +16,10 @@ namespace Treatail.NEO.WebApi.Logic
             }
         }
 
-        public static bool CheckApiKey(HttpRequestBase request)
+        public static void CheckApiKey(HttpRequestBase request)
         {
-            if (request.Headers[ApiKey] != null)
-                return true;
-
-            return false;
+            if (request.Headers[ApiKey] == null)
+                throw new Exception("Invalid API Key Provided");
         }
     }
 }

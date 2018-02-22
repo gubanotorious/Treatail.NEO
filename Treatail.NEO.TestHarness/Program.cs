@@ -6,42 +6,30 @@ namespace Treatail.NEO.TestHarness
 {
     class Program
     {
+        private static string _privateKeyHex;
+        private static string _address = "AKwhdHvupN2dRrMRTpNAFYgFQZiLmftmz6";
+        private static string _address2 = "AQ9Tdwrutqnpe1i27U1GCi3fQjYWoJuRFy";
+        private static string _serviceBaseUrl = "https://neoapi.treatail.com";
+        private static string _apiKey = "SECUREKEY";
+
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
-            Task t = MainAsync(args);
-            t.Wait();
-        }
-
-        static async Task MainAsync(string[] args)
-        {
+            //Get the private key
             Console.Write("Private Key Hex: ");
-            string privateKeyHex = Console.ReadLine();
-            NetworkType network = NetworkType.Testnet;
-            string address = "AKwhdHvupN2dRrMRTpNAFYgFQZiLmftmz6";
-            string servicesBaseUrl = "https://neoapi.treatail.com";
-            string apiKey = "SECUREKEY";
+            _privateKeyHex = Console.ReadLine();
 
-            //Test the wallet
-            Console.WriteLine("Testing wallet generation...");
+            //Run the contract tests via Lux
+            ContractTest.Run(_privateKeyHex, _address, _address2);
 
-            Tests.WalletTest walletTest = new Tests.WalletTest();
-            bool success = walletTest.Create();
-            Console.WriteLine("-Lux: " + (success ? "Success" : "Fail"));
+            //Run the tests via the WebApi
+            WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
 
-            //Test the wallet REST endpoint
-            success = false;
-            WebApi.Tests.WalletTest apiWalletTest = new WebApi.Tests.WalletTest(servicesBaseUrl, apiKey);
-            var wallet = await apiWalletTest.Create();
-            if (wallet != null && !String.IsNullOrEmpty(wallet.Address) && !String.IsNullOrEmpty(wallet.PrivateKey))
-                success = true;
-            Console.WriteLine("-WebApi: " + (success ? "Success" : "Fail"));
-
-            //Test the token
-            Console.WriteLine("Verifying the token... via Lux");
-            Treatail.NEO.Tests.TokenTest tokenTest = new Treatail.NEO.Tests.TokenTest(network, privateKeyHex);
-            success = tokenTest.VerifyToken();
-            Console.WriteLine(success ? "Success" : "Fail");
-            Console.ReadLine();
+            Console.WriteLine("Press any key");
+            Console.Read();
         }
     }
 }

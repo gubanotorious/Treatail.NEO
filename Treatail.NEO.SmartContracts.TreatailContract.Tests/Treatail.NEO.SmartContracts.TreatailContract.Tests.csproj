@@ -36,7 +36,8 @@
     <Reference Include="NEO-Emulator">
       <HintPath>..\..\neo-lux\neo-lux\bin\Debug\NEO-Emulator.dll</HintPath>
     </Reference>
-    <Reference Include="NeoLux">
+    <Reference Include="NeoLux, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\neo-lux\neo-lux\bin\Debug\NeoLux.dll</HintPath>
     </Reference>
     <Reference Include="System" />

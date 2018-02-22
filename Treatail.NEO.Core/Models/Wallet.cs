@@ -9,10 +9,12 @@ namespace Treatail.NEO.Core.Models
     public enum WalletBalanceType
     {
         NEO,
-        NeoGas,
-        TTL
+        GAS
     }
 
+    /// <summary>
+    /// Wrapper class to handle all wallet related creation and function calls
+    /// </summary>
     [Serializable]
     public class Wallet
     {
@@ -58,12 +60,12 @@ namespace Treatail.NEO.Core.Models
         /// <summary>
         /// Gets the balances for the wallet from the specified network
         /// </summary>
-        /// <param name="networkType">NetworkType - network to use</param>
-        /// <returns>Dictionary - balances in the wallet</string></returns>
+        /// <param name="networkType">Network to use</param>
+        /// <returns>Balances in the wallet</string></returns>
         private Dictionary<string, decimal> GetBalances(NetworkType networkType)
         {
             var network = NetworkHelper.GetNeoRPCForType(networkType);
-            return network.GetBalancesOf(GetKeys(), true);
+            return network.GetBalancesOf(GetKeys(), false);
         }
 
     }
