@@ -1,5 +1,6 @@
 ﻿using NeoLux;
 using System;
+using System.Numerics;
 using Treatail.NEO.Core.Logic;
 
 namespace Treatail.NEO.Core.Models
@@ -29,26 +30,20 @@ namespace Treatail.NEO.Core.Models
         }
 
         /// <summary>
-        /// Deploys the intial supply of TTL to the Treatail Address
-        /// </summary>
-        /// <returns>Success</returns>
-        public bool DeployTokens()
-        {
-            //Must be invoked with the Treatail Wallet
-            if (_contextWallet == null)
-                return false;
-
-            return _api.CallContract(_contextWallet.GetKeys(), _contractScriptHash, "deploy", new object[] { 0 });
-        }
-
-        /// <summary>
         /// Returns the balance of TTL for a specified address
         /// </summary>
         /// <param name="address">Address to get the balance of</param>
         /// <returns>Balance of tokens for the specified address</returns>
         public decimal GetTokensBalance(string address)
         {
-            return _token.BalanceOf(ConversionHelper.StringToBytes(address));
+            //return _token.BalanceOf(ConversionHelper.StringToBytes(address));
+            var response = _api.TestInvokeScript(_contractScriptHash, "balanceOf", new object[] { ConversionHelper.StringToBytes(address) });
+
+            byte[] res = (byte[])response.result;
+            if (res.Length == 0)
+                return 0;
+
+            return BitConverter.ToInt32(res, 0);
         }
 
         /// <summary>
@@ -81,10 +76,11 @@ namespace Treatail.NEO.Core.Models
         /// Gets the required amount of TTL to create a Treatail Asset
         /// </summary>
         /// <returns>Cost of creating an asset</returns>
-        public int GetAssetCreateCost()
+        public BigInteger GetAssetCreateCost()
         {
             var response = _api.TestInvokeScript(_contractScriptHash, "getassetcreatecost", new object[] { 0 });
-            return (int)response.result;
+            byte[] res = (byte[])response.result;
+            return new BigInteger(res);
         }
 
         /// <summary>
@@ -92,10 +88,10 @@ namespace Treatail.NEO.Core.Models
         /// </summary>
         /// <param name="treatailId">Treatail Asset identifier</param>
         /// <returns>Address of the asset owner</returns>
-        public byte[] GetAssetOwner(string treatailId)
+        public string GetAssetOwner(string treatailId)
         {
             var response = _api.TestInvokeScript(_contractScriptHash, "getassetowner", new object[] { ConversionHelper.StringToBytes(treatailId) });
-            return (byte[])response.result;
+            return ConversionHelper.BytesToString((byte[])response.result);
         }
 
         /// <summary>
@@ -103,10 +99,10 @@ namespace Treatail.NEO.Core.Models
         /// </summary>
         /// <param name="treatailId">Treatail Asset identifier</param>
         /// <returns>Asset details</returns>
-        public byte[] GetAssetDetails(string treatailId)
+        public string GetAssetDetails(string treatailId)
         {
             var response = _api.TestInvokeScript(_contractScriptHash, "getassetdetails", new object[] { ConversionHelper.StringToBytes(treatailId) });
-            return (byte[])response.result;
+            return ConversionHelper.BytesToString((byte[])response.result);
         }
 
         /// <summary>

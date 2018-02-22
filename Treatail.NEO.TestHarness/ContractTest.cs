@@ -87,21 +87,6 @@ namespace Treatail.NEO.TestHarness
 
             Console.WriteLine();
 
-            //Test deploy the tokens
-            Console.WriteLine("Token deploy...");
-            try
-            {
-                success = tokenTest.Deploy();
-                Console.WriteLine("Token Deploy Success");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Token Deploy Fail " + ex.Message);
-                Console.ReadLine();
-            }
-
-            Console.WriteLine();
-
             //Check the wallet balance
             Console.WriteLine("Getting balance...");
             try
@@ -135,6 +120,35 @@ namespace Treatail.NEO.TestHarness
             Console.WriteLine();
             Console.WriteLine("Asset Functions Testing");
             Console.WriteLine("------------------------");
+
+            Console.WriteLine("Getting asset create cost");
+            //Check the asset create cost
+            try
+            {
+                var cost = assetTest.GetCreateCost();
+                Console.WriteLine("Asset Create Cost: " + cost);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not get create cost " + ex.Message);
+                Console.ReadLine();
+            }
+
+            Console.WriteLine("Setting asset create cost");
+            //Check the asset create cost
+            try
+            {
+                assetTest.SetCreateCost(1);
+                Console.WriteLine("Success");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not set create cost " + ex.Message);
+                Console.ReadLine();
+            }
+
+            Console.WriteLine();
+
             Console.WriteLine("Creating...");
             //Check create
             try

@@ -38,8 +38,7 @@ namespace Treatail.NEO.WebApi.Controllers
         public ActionResult GetDetail(string id)
         {
             Contract contract = new Contract(CurrentNetwork, null);
-            byte[] details = contract.GetAssetDetails(id);
-            return Json(ConversionHelper.BytesToHex(details), JsonRequestBehavior.AllowGet);
+            return Json(contract.GetAssetDetails(id), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -50,8 +49,7 @@ namespace Treatail.NEO.WebApi.Controllers
         public ActionResult GetOwner(string id)
         {
             Contract contract = new Contract(CurrentNetwork, null);
-            byte[] details = contract.GetAssetOwner(id);
-            return Json(ConversionHelper.BytesToHex(details), JsonRequestBehavior.AllowGet);
+            return Json(contract.GetAssetOwner(id), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

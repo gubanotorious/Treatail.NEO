@@ -8,7 +8,7 @@ namespace Treatail.NEO.TestHarness
     {
         private static string _privateKeyHex;
         private static string _address = "AKwhdHvupN2dRrMRTpNAFYgFQZiLmftmz6";
-        private static string _address2 = "AQ9Tdwrutqnpe1i27U1GCi3fQjYWoJuRFy";
+        private static string _address2 = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y";
         private static string _serviceBaseUrl = "https://neoapi.treatail.com";
         private static string _apiKey = "SECUREKEY";
 
@@ -26,7 +26,7 @@ namespace Treatail.NEO.TestHarness
             ContractTest.Run(_privateKeyHex, _address, _address2);
 
             //Run the tests via the WebApi
-            WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
+            //WebApiTest.Run(_serviceBaseUrl, _apiKey, _privateKeyHex, _address, _address2);
 
             Console.WriteLine("Press any key");
             Console.Read();

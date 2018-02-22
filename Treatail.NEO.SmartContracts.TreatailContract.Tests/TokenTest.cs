@@ -33,12 +33,6 @@ namespace Treatail.NEO.Tests
             return true;
         }
 
-        public bool Deploy()
-        {
-            Contract contract = new Contract(NetworkType.Testnet, _privateKeyHex);
-            return contract.DeployTokens();
-        }
-
         public decimal GetBalance(string address)
         {
             Contract contract = new Contract(NetworkType.Testnet, _privateKeyHex);

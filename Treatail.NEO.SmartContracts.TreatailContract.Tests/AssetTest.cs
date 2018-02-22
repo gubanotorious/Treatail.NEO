@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Treatail.NEO.Core.Logic;
@@ -19,6 +20,18 @@ namespace Treatail.NEO.Tests
             _privateKeyHex = privateKeyHex;
         }
 
+        public BigInteger GetCreateCost()
+        {
+            Contract contract = new Contract(_network, _privateKeyHex);
+            return contract.GetAssetCreateCost();
+        }
+
+        public bool SetCreateCost(int cost)
+        {
+            Contract contract = new Contract(_network, _privateKeyHex);
+            return contract.SetAssetCreateCost(cost);
+        }
+
         public bool Create(string treatailAssetId, string ownerAddress, string assetDetails, bool chargeTTL)
         {
             Contract contract = new Contract(_network, _privateKeyHex);
@@ -28,15 +41,13 @@ namespace Treatail.NEO.Tests
         public string GetDetail(string treatailAssetId)
         {
             Contract contract = new Contract(_network, _privateKeyHex);
-            byte[] details = contract.GetAssetDetails(treatailAssetId);
-            return ConversionHelper.BytesToHex(details);
+            return contract.GetAssetDetails(treatailAssetId);
         }
 
         public string GetOwner(string treatailAssetId)
         {
             Contract contract = new Contract(_network, _privateKeyHex);
-            byte[] details = contract.GetAssetOwner(treatailAssetId);
-            return ConversionHelper.BytesToHex(details);
+            return contract.GetAssetOwner(treatailAssetId);
         }
 
         public bool Transfer(string treatailAssetId, string fromAddress, string toAddress)
