@@ -32,7 +32,7 @@ namespace Treatail.NEO.TestHarness
             Console.WriteLine();
             Console.WriteLine("Wallet Functions Testing");
             Console.WriteLine("------------------------");
-            
+
 
             //Test the wallet generation
             Console.WriteLine("Wallet generation...");
@@ -71,21 +71,6 @@ namespace Treatail.NEO.TestHarness
             Console.WriteLine();
             Console.WriteLine("Token Functions Testing");
             Console.WriteLine("------------------------");
-            
-
-            //Test the token exists
-            Console.WriteLine("Verifying the token...");
-            try
-            {
-                success = tokenTest.VerifyToken();
-                Console.WriteLine("Verification Success");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Verification Fail " + ex.Message);
-            }
-
-            Console.WriteLine();
 
             //Check the wallet balance
             Console.WriteLine("Getting balance...");
@@ -168,6 +153,7 @@ namespace Treatail.NEO.TestHarness
             try
             {
                 var details = assetTest.GetDetail(testAssetId);
+                Console.WriteLine("Details: " + details);
                 Console.WriteLine(!String.IsNullOrEmpty(details) ? "Success" : "Couldn't get asset details.");
             }
             catch (Exception ex)
@@ -181,7 +167,8 @@ namespace Treatail.NEO.TestHarness
             //Check owner
             try
             {
-                var owner = assetTest.GetDetail(testAssetId);
+                var owner = assetTest.GetOwner(testAssetId);
+                Console.WriteLine("Owner: " + owner);
                 Console.WriteLine(!String.IsNullOrEmpty(owner) ? "Success" : "Couldn't get asset owner.");
             }
             catch (Exception ex)
