@@ -19,30 +19,13 @@ namespace Treatail.NEO.Tests
             _privateKeyHex = privateKeyHex;
         }
 
-        public bool VerifyToken()
-        {
-            //var api = NetworkHelper.GetNeoRPCForType(NetworkType.Testnet);
-            //var token = api.GetToken("TTL");
-            //if (token == null)
-            //{
-            //    Console.WriteLine("Token is not found");
-            //    return false;
-            //}
-
-            //Console.WriteLine("Token found");
-            //return true;
-
-            //This won't get added to neo-lux until deployed on the mainnet.
-            return false;
-        }
-
-        public decimal GetBalance(string address)
+        public decimal GetBalance()
         {
             Contract contract = new Contract(NetworkType.Testnet, _privateKeyHex);
-            return contract.GetTokensBalance(address);
+            return contract.GetTokenBalance();
         }
 
-        public bool Transfer(string fromAddress, string toAddress, int amount)
+        public bool Transfer(string fromAddress, string toAddress, decimal amount)
         {
             Contract contract = new Contract(NetworkType.Testnet, _privateKeyHex);
             return contract.TransferTokens(fromAddress, toAddress, amount);

@@ -9,12 +9,12 @@ namespace Treatail.NEO.TestHarness
 {
     public static class ContractTest
     {
-        public static void Run(string privateKeyHex, string address, string address2)
+        public static void Run(string privateKeyHex, string fromAddress, string toAddress)
         {
             NetworkType network = NetworkType.Testnet;
             bool success = false;
             decimal balance = 0;
-            string testAssetId = "TESTASSET";
+            string testAssetId = "TestAssetId123";
 
             Tests.WalletTest walletTest = new Tests.WalletTest();
             Tests.TokenTest tokenTest = new Tests.TokenTest(network, privateKeyHex);
@@ -25,23 +25,16 @@ namespace Treatail.NEO.TestHarness
             Console.WriteLine("TREATAIL SMART CONTRACT TEST");
             Console.WriteLine("----------------------------");
             Console.WriteLine("Private Key:" + privateKeyHex);
-            Console.WriteLine("Address:" + address);
-            Console.WriteLine("Address2:" + address2);
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Wallet Functions Testing");
-            Console.WriteLine("------------------------");
+            Console.WriteLine("From Address:" + fromAddress);
+            Console.WriteLine("To Address:" + toAddress);
 
 
             //Test the wallet generation
-            Console.WriteLine("Wallet generation...");
-            success = walletTest.Create();
-            Console.WriteLine((success ? "Success" : "Fail"));
+            Console.WriteLine();
+            Console.Write("Testing wallet generation:");
+            Console.WriteLine((walletTest.Create() ? "Success" : "Fail"));
 
             Console.WriteLine();
-
-            //Get NEO balance
             Console.WriteLine("Check the wallet balances for the private key...");
             //Get NEO balance
             try
@@ -53,9 +46,6 @@ namespace Treatail.NEO.TestHarness
             {
                 Console.WriteLine("Could not get NeoGas Balance: " + ex);
             }
-
-            Console.WriteLine();
-
             //Get Gas balance
             try
             {
@@ -66,18 +56,11 @@ namespace Treatail.NEO.TestHarness
             {
                 Console.WriteLine("Could not get GAS Balance: " + ex);
             }
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Token Functions Testing");
-            Console.WriteLine("------------------------");
-
             //Check the wallet balance
-            Console.WriteLine("Getting balance...");
             try
             {
-                balance = tokenTest.GetBalance(address);
-                Console.WriteLine("Balance " + balance);
+                balance = tokenTest.GetBalance();
+                Console.WriteLine("TTL Balance " + balance);
             }
             catch (Exception ex)
             {
@@ -85,13 +68,12 @@ namespace Treatail.NEO.TestHarness
                 Console.ReadLine();
             }
 
+            ////Check transfer
             Console.WriteLine();
-
-            //Check transfer
-            Console.WriteLine("Transferring...");
+            Console.WriteLine("Transferring TTL...");
             try
             {
-                success = tokenTest.Transfer(address, address2, 1);
+                success = tokenTest.Transfer(fromAddress, toAddress, 50);
                 Console.WriteLine(success ? "Success" : "Couldn't transfer tokens.");
             }
             catch (Exception ex)
@@ -100,14 +82,9 @@ namespace Treatail.NEO.TestHarness
                 Console.ReadLine();
             }
 
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Asset Functions Testing");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine("Getting asset create cost");
             //Check the asset create cost
+            Console.WriteLine();
+            Console.WriteLine("Getting asset create cost");
             try
             {
                 var cost = assetTest.GetCreateCost();
@@ -119,8 +96,8 @@ namespace Treatail.NEO.TestHarness
                 Console.ReadLine();
             }
 
+            //Set the asset create cost
             Console.WriteLine("Setting asset create cost");
-            //Check the asset create cost
             try
             {
                 assetTest.SetCreateCost(1);
@@ -133,12 +110,11 @@ namespace Treatail.NEO.TestHarness
             }
 
             Console.WriteLine();
-
-            Console.WriteLine("Creating...");
+            Console.WriteLine("Creating asset...");
             //Check create
             try
             {
-                success = assetTest.Create(testAssetId, address, "1234567890", false);
+                success = assetTest.Create(testAssetId, fromAddress, "1234567890", false);
                 Console.WriteLine(success ? "Success" : "Couldn't create asset.");
             }
             catch (Exception ex)
@@ -178,11 +154,11 @@ namespace Treatail.NEO.TestHarness
             }
 
             Console.WriteLine();
-            Console.WriteLine("Transferring...");
+            Console.WriteLine("Transferring asset...");
             //Check transfer
             try
             {
-                success = assetTest.Transfer(testAssetId, address, address2);
+                success = assetTest.Transfer(testAssetId, fromAddress, toAddress);
                 Console.WriteLine(success ? "Success" : "Couldn't transfer asset.");
             }
             catch (Exception ex)
