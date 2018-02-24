@@ -13,6 +13,11 @@ The cornerstone of the next evolution to the Treatail Ecosystem will be the crea
 
 Find out more at http://www.treatail.com
 
+### Demo Site
+There is a demo build of this code hosted at https://neo.treatail.com.  You must use this URL when logging in, if you are at https://app.treatil.com, you are in the production site and this code will not work (and you will end up installing the production build extension and not the NEO build extension).  
+
+Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offers can be made to is the "Treatail Demo Store".  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
+
 ### Documentation
 #### Whitepaper
 A brief whitepaper for the Treatail product and blockchain offering can be found here:
@@ -24,9 +29,6 @@ https://www.youtube.com/watch?v=Fcz8XJctHok
 
 #### Code and API Documentation 
 Commented code and Visual Studio XML comments, with additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
-
-### Demo Site
-https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offers can be made to is the "Treatail Demo Store".  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
 
 ### Screenshots
 #### Treatail website
