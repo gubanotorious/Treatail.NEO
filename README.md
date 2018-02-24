@@ -28,7 +28,7 @@ https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 
 ### Screenshots
 <p align="center">
-  <img src="/Screenshots/login.png" />
+  <img src="/Screenshots/loginpage.png" />
 </p>
 
 <p align="center">
