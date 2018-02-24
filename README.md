@@ -11,7 +11,7 @@ Treatail is a revolutionary commerce layer that sits on top of all the sites and
 
 The cornerstone of the next evolution to the Treatail Ecosystem will be the creation of Treatail Token (TTL) and smart contracts to facilitate transactions on the blockchain and to further incent users.  To date, blockchain has primarily been available to technical users.  Treatail aims to change this by bringing the power of the NEO blockchain to the average user using intuitive interfaces and seamless integration into the Treatail platform.
 
-Find out more at http://www.treatail.com
+Find out more at http://www.treatail.com and check out the whitepaper below.
 
 ### Demo Build
 There is a demo build of this code hosted at https://neo.treatail.com.              
