@@ -26,7 +26,7 @@ https://www.youtube.com/watch?v=Fcz8XJctHok
 Commented code and Visual Studio XML comments, with additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
 
 ### Demo Site
-https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offes can be made to is the Treatail Demo Store.  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
+https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offers can be made to is the "Treatail Demo Store".  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
 
 ### Screenshots
 #### Login screen and Signup
