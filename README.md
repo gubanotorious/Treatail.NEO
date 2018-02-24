@@ -52,7 +52,7 @@ https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 </p>
 
 <p align="center">
-  <img src="/Screenshots/sendtokens-treatail.png" />
+  <img src="/Screenshots/sendtoken-treatail.png" />
 </p>
 
 <p align="center">
