@@ -29,46 +29,62 @@ Commented code and Visual Studio XML comments, with additional compiled Microsof
 https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offes can be made to is the Treatail Demo Store.  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
 
 ### Screenshots
+###### Login screen and Signup
 <p align="center">
   <img src="/Screenshots/login.png" />
 </p>
 
+###### Active deal list interface
 <p align="center">
   <img src="/Screenshots/activedeals.png" />
 </p>
 
+###### View deal details
 <p align="center">
   <img src="/Screenshots/dealdetails.png" />
 </p>
 
+###### Seller deal response interface (simple)
 <p align="center">
   <img src="/Screenshots/dealresponse.png" />
 </p>
 
+###### Seller deal response interface (advanced with line item modification and shared deals)
+<p align="center">
+  <img src="/Screenshots/dealadvancedresponse.png" />
+</p>
+
+##### Buyer payment
 <p align="center">
   <img src="/Screenshots/payment.png" />
 </p>
 
+##### User details screen
 <p align="center">
   <img src="/Screenshots/userdetails.png" />
 </p>
 
+##### Sending TTL Token to a Treatail user
 <p align="center">
   <img src="/Screenshots/sendtoken-treatail.png" />
 </p>
 
+##### Sending TTL Token to a NEO Address
 <p align="center">
   <img src="/Screenshots/sendtoken-neo.png" />
 </p>
 
+##### TTL Token transaction history
 <p align="center">
   <img src="/Screenshots/ttlhistory.png" />
 </p>
 
+##### List of user's Treatail Assets
 <p align="center">
   <img src="/Screenshots/assetlist.png" />
 </p>
 
+##### Verified Treatail Asset details screen
 <p align="center">
   <img src="/Screenshots/verifiedassetdetails.png" />
 </p>
