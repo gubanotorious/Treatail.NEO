@@ -11,6 +11,10 @@ Treatail is a revolutionary commerce layer that sits on top of all the sites and
 
 The cornerstone of the next evolution to the Treatail Ecosystem will be the creation of Treatail Token (TTL) and smart contracts to facilitate transactions on the blockchain and to further incent users.  To date, blockchain has primarily been available to technical users.  Treatail aims to change this by bringing the power of the NEO blockchain to the average user using intuitive interfaces and seamless integration into the Treatail platform.
 
+### Whitepaper
+A brief whitepaper for the Treatail Product and Blockchain Offering can be found here:
+[https://docs.google.com/document/d/1w7gRlUwW19UAfAmr1h0Vhd9hMxEF_YMk_9UdN2g7lwI](https://docs.google.com/document/d/1w7gRlUwW19UAfAmr1h0Vhd9hMxEF_YMk_9UdN2g7lwI)
+
 ### Architecture and Hosting
 #### Hosting
 Treatail leverages Azure and hosts all services and middleware as Platform as a Service.
