@@ -16,8 +16,7 @@ namespace Treatail.NEO.Core.Logic
             var bytes = new byte[32];
             rnd.NextBytes(bytes);
             var key = new KeyPair(bytes);
-
-            //I need to load the wallet somehow?
+            
             return new Wallet
             {
                 Address = key.address,
