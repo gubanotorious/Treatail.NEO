@@ -73,7 +73,7 @@ https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 
 ### Architecture and Hosting
 #### Hosting
-Treatail leverages Azure and hosts all services and middleware as Platform as a Service.
+Treatail is hosted on Microsoft Azure - Platform as a Service
 
 #### Frontend
 Microsoft .NET Web Application and Mobile Apps available for iOS and Android
