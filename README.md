@@ -23,7 +23,7 @@ A quick demo video of the code in this repository in action can be found on YouT
 https://www.youtube.com/watch?v=Fcz8XJctHok
 
 #### Code / API 
-Commented code using Microsoft Visual Studio standard XMLs commenting, and additional compiledMicrosoft HTML Help (.chm) found in the /Docs folder
+Commented code and Visual Studio XML comments, with additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
 
 #### Demo Site
 https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offes can be made to is the Treatail Demo Store.  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
