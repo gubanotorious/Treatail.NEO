@@ -33,8 +33,8 @@ https://neo.treatail.com.  Simply sign up for an account with your e-mail addres
   <img src="/Screenshots/website.png" />
 </p>
 
-#### Login screen and Signup
-Login or sign up for an account here.
+#### Login and signup
+Login or sign up for an account
 <p align="center">
   <img src="/Screenshots/login.png" />
 </p>
