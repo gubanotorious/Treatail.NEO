@@ -90,7 +90,7 @@ Microsft SQL Server, Redis, and Microsoft Cosmos DB
 #### Storage
 Azure Blob Storage
 
-### Credits
+## Credits
 This project wouldn't have been possible without the education, hard work, and assistance from the [City of Zion](https://github.com/CityOfZion) NEO development community.  A big shout out to Sérgio Flores ([Relfos](https://github.com/Relfos)) for his work on the debugger and neo-lux, and for all his assistance in getting neo-lux implemented in the project.  Thanks to Chris Hager ([metachris](https://github.com/metachris)) for his assistance in getting me started and rolling on neo-python and the basics of NEO development.
 
 
