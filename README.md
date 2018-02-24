@@ -24,6 +24,9 @@ https://www.youtube.com/watch?v=Fcz8XJctHok
 Microsoft HTML Help (.chm) found in the /Docs folder: 
 https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 
+### Screenshots
+
+
 ### Architecture and Hosting
 #### Hosting
 Treatail leverages Azure and hosts all services and middleware as Platform as a Service.
@@ -39,7 +42,6 @@ Microsft SQL Server, Redis, and Microsoft Cosmos DB
 
 #### Storage
 Azure Blob Storage
-
 
 
 
