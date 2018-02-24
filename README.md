@@ -11,6 +11,8 @@ Treatail is a revolutionary commerce layer that sits on top of all the sites and
 
 The cornerstone of the next evolution to the Treatail Ecosystem will be the creation of Treatail Token (TTL) and smart contracts to facilitate transactions on the blockchain and to further incent users.  To date, blockchain has primarily been available to technical users.  Treatail aims to change this by bringing the power of the NEO blockchain to the average user using intuitive interfaces and seamless integration into the Treatail platform.
 
+Find out more at http://www.treatail.com
+
 ### Documentation and Demo
 #### Whitepaper
 A brief whitepaper for the Treatail product and blockchain offering can be found here:
@@ -25,7 +27,49 @@ Microsoft HTML Help (.chm) found in the /Docs folder:
 https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 
 ### Screenshots
+<p align="center">
+  <img src="/Screenshots/login.png" />
+</p>
 
+<p align="center">
+  <img src="/Screenshots/activedeals.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/dealdetails.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/dealresponse.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/payment.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/userdetails.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/sendtokens-treatail.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/sendtoken-neo.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/ttlhistory.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/assetlist.png" />
+</p>
+
+<p align="center">
+  <img src="/Screenshots/verifiedassetdetails.png" />
+</p>
 
 ### Architecture and Hosting
 #### Hosting
