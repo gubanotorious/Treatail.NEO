@@ -109,13 +109,13 @@ Treatail is hosted on Microsoft Azure - Platform as a Service
 Microsoft .NET Web Application and Mobile Apps available for iOS and Android
 
 #### Backend
-Microsoft .NET WebAPI (REST)
+Microsoft .NET WebAPI (REST), Treatail.NEO Middleware
 
 #### Databases
 Microsft SQL Server, Redis, and Microsoft Cosmos DB
 
 #### Storage
-Azure Blob Storage
+Azure Blob Storage, NEO Blockchain
 
 ## Credits
 This project wouldn't have been possible without the education, hard work, and assistance from the [City of Zion](https://github.com/CityOfZion) NEO development community.  A big shout out to Sérgio Flores ([Relfos](https://github.com/Relfos)) for his work on the debugger and neo-lux, and for all his assistance in getting neo-lux implemented in the project.  Thanks to Chris Hager ([metachris](https://github.com/metachris)) for his assistance in getting me started and rolling on neo-python and the basics of NEO development.
