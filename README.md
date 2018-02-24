@@ -126,7 +126,8 @@ Microsft SQL Server, Redis, and Microsoft Cosmos DB
 Azure Blob Storage, NEO Blockchain
 
 ## Credits
-This project wouldn't have been possible without the support from the [City of Zion](https://github.com/CityOfZion) NEO development community.  A big shout out to Sérgio Flores ([Relfos](https://github.com/Relfos)) for his work on the debugger and neo-lux, and for all his assistance in helping me get neo-lux implemented in the project.  Thanks to Chris Hager ([metachris](https://github.com/metachris)) for his assistance in getting me started and rolling on neo-python and the basics of NEO development.
+This project wouldn't have been possible without the support from the [City of Zion](https://github.com/CityOfZion) NEO development community.  A big shout out to Sérgio Flores ([Relfos](https://github.com/Relfos)) for his work on the debugger and neo-lux, and for all his assistance in helping me get neo-lux implemented in the project.  Thanks to Chris Hager ([metachris](https://github.com/metachris)) for his assistance in getting me started and rolling on neo-python and NEO development, and for his great work on [hosting a privatenet docker](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
+
 
 
 
