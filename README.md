@@ -13,7 +13,7 @@ The cornerstone of the next evolution to the Treatail Ecosystem will be the crea
 
 Find out more at http://www.treatail.com
 
-### Demo Site
+### Demo Build
 There is a demo build of this code hosted at https://neo.treatail.com.              
 _You must use this URL when signing up and logging in.  If you use the standard Treatail website signup and login, you will be in the production site without this code deployed and you will end up with the wrong extension build installed.  If this happens, just right click and uninstall the extension from chrome and go to the correct url._
 
