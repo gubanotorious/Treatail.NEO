@@ -17,7 +17,7 @@ A brief whitepaper for the Treatail product and blockchain offering can be found
 https://docs.google.com/document/d/1w7gRlUwW19UAfAmr1h0Vhd9hMxEF_YMk_9UdN2g7lwI
 
 #### Product / dApp 
-A quick demo video can be found on YouTube:
+A quick demo video of the blockchain functionality in the product can be found on YouTube:
 https://www.youtube.com/watch?v=Fcz8XJctHok
 
 
