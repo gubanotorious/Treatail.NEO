@@ -5,7 +5,7 @@
 ## This Repository
 This repository contains the source code Treatail Smart Contracts for the NEP5 Token (TTL) and Treatail Asset management.
 
-## The dApp / Product
+## The Product / dApp
 ### Overview
 Treatail is a revolutionary commerce layer that sits on top of all the sites and marketplaces on the Internet.  Our platform allows for buyers, both consumer and business, to make offers and receive personalized deals on goods and services listed for sale on any site doing commerce on the Internet.  Our goal is to help buyers to get unpublished, personalized deals and help online retailers boost profits by optimizing inventory through precision discounts and reduced cart abandonment.
 
