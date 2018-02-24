@@ -29,73 +29,73 @@ Commented code and Visual Studio XML comments, with additional compiled Microsof
 https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offes can be made to is the Treatail Demo Store.  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
 
 ### Screenshots
-###### Login screen and Signup
+#### Login screen and Signup
 Login or sign up for an account here.
 <p align="center">
   <img src="/Screenshots/login.png" />
 </p>
 
-###### Active deal list interface
+#### Active deal list interface
 This interface will show the user all the active deals they currently have outstanding.
 <p align="center">
   <img src="/Screenshots/activedeals.png" />
 </p>
 
-###### Deal details
+#### Deal details
 This interface shows the user the deal details (terms of the offer, captured information, etc) and allows the user to take action.
 <p align="center">
   <img src="/Screenshots/dealdetails.png" />
 </p>
 
-###### Seller deal response interface (simple)
+#### Seller deal response interface (simple)
 This is the interface that lets sellers send a basic response to the buyer based on USD and TTL price
 <p align="center">
   <img src="/Screenshots/dealresponse.png" />
 </p>
 
-###### Seller deal response interface (advanced)
+#### Seller deal response interface (advanced)
 The advanced deal response interface will allow the seller to add or adjust line items, create multiple counter offer options for the buyer, and allow the buyer to share the deal(s).
 <p align="center">
   <img src="/Screenshots/dealadvancedresponse.png" />
 </p>
 
-##### Buyer payment
+#### Buyer payment
 This is the payment screen for the demo.  Treatail uses PayPal for all USD transactions, but this was unavailable in the demo site.  The demo site will only make the blockchain related TTL transfers at the close of a deal, but we skip over PayPal piece for brevity.
 <p align="center">
   <img src="/Screenshots/payment.png" />
 </p>
 
-##### User details screen
+#### User details screen
 This is the screen where the user can find their information - the links for them to share their referral link on social media, manage their TTL Token wallet and transfers, and see audit history of transfers of TTL.
 <p align="center">
   <img src="/Screenshots/userdetails.png" />
 </p>
 
-##### Sending TTL Token to a Treatail user
+#### Sending TTL Token to a Treatail user
 Users can easily send TTL Tokens to other users in the Treatail ecosystem by providing just an e-mail address.  Treatail will find the hosted wallet information for that user and make the blockchain transfer on the behalf of the user.
 <p align="center">
   <img src="/Screenshots/sendtoken-treatail.png" />
 </p>
 
-##### Sending TTL Token to a NEO Address
+#### Sending TTL Token to a NEO Address
 Users can also send TTL Tokens to an external NEO Address, for example, if they want to use their own NEP5 compatible wallet to manage their own keys for the TTL they earn.  They can always transfer back to their Treatail address if needed.
 <p align="center">
   <img src="/Screenshots/sendtoken-neo.png" />
 </p>
 
-##### TTL Token transaction history
+#### TTL Token transaction history
 This provides an audit trail for any TTL Token transfer activity within Treatail.
 <p align="center">
   <img src="/Screenshots/ttlhistory.png" />
 </p>
 
-##### List of user's Treatail Assets
+#### List of user's Treatail Assets
 Treatail Assets are blockchain verified asset receipts for purchases made in the Treatail Ecosystem.  Users can verify the purchase and authenticity of an item using blockchain as the source of truth.
 <p align="center">
   <img src="/Screenshots/assetlist.png" />
 </p>
 
-##### Verified Treatail Asset details screen
+#### Verified Treatail Asset details screen
 This is the asset details screen that actively compares the details hash of the item against the blockchain and shows the "Blockchain Verified" badge if the data they are viewing matches the data stored to the blockchain.
 <p align="center">
   <img src="/Screenshots/verifiedassetdetails.png" />
