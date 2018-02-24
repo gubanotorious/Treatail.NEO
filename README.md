@@ -20,7 +20,6 @@ https://docs.google.com/document/d/1w7gRlUwW19UAfAmr1h0Vhd9hMxEF_YMk_9UdN2g7lwI
 A quick demo video of the code in this repository in action can be found on YouTube:
 https://www.youtube.com/watch?v=Fcz8XJctHok
 
-
 #### Code / API 
 Microsoft HTML Help (.chm) found in the /Docs folder: 
 https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
