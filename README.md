@@ -3,7 +3,7 @@
 </p>
 
 ## This Repository
-This repository contains the source code for the Treatail smart contracts for the NEP5 token TTL and Treatail Asset storage and management.
+This repository contains the source code Treatail Smart Contracts for the NEP5 Token (TTL) and Treatail Asset management.
 
 ## The dApp / Product
 ### Overview
