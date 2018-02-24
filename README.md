@@ -27,11 +27,11 @@ Microsoft HTML Help (.chm) found in the /Docs folder:
 https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 
 #### Demo Site
-The demo implementation of this code in the product can be accessed at https://neo.treatail.com.   Simply sign up for an account to login as a buyer, I will respond to all offers as a seller.  If you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
+https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offes can be made to is the Treatail Demo Store.  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
 
 ### Screenshots
 <p align="center">
-  <img src="/Screenshots/loginpage.png" />
+  <img src="/Screenshots/login.png" />
 </p>
 
 <p align="center">
