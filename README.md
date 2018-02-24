@@ -25,8 +25,8 @@ Microsoft .NET Web Application and Mobile Apps available for iOS and Android
 #### Backend
 Microsoft .NET WebAPI (REST)
 
-#### Database
-Microsft SQL Server and Microsoft Cosmos DB
+#### Databases
+Microsft SQL Server, Redis, and Microsoft Cosmos DB
 
 #### Storage
 Azure Blob Storage
