@@ -22,7 +22,8 @@ https://www.youtube.com/watch?v=Fcz8XJctHok
 
 
 #### Code / API 
-Microsoft HTML Help (.chm) found in the /Docs folder
+Microsoft HTML Help (.chm) found in the /Docs folder: 
+https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
 
 ### Architecture and Hosting
 #### Hosting
