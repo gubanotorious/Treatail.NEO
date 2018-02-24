@@ -24,7 +24,7 @@ https://www.youtube.com/watch?v=Fcz8XJctHok
 
 #### Code / API 
 Microsoft HTML Help (.chm) found in the /Docs folder: 
-https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm
+https://github.com/gubanotorious/Treatail.NEO/blob/master/Docs/Treatail.NEO.chm (you will need to clone the repo to access this file - for some reason it doesn't download direct and open correctly)
 
 #### Demo Site
 https://neo.treatail.com.  Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offes can be made to is the Treatail Demo Store.  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
