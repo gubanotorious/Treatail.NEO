@@ -34,7 +34,5 @@ namespace Treatail.NEO.Core.Logic
 
             return NeoRPC.ForTestNet();
         }
-
-
     }
 }
