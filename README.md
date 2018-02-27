@@ -3,7 +3,7 @@
 </p>
 
 ## This Repository
-This repository contains the source code for the Treatail Smart Contract for the NEP5 Token (TTL) and Treatail Asset management, Core middleware (leveraging [neo-lux](https://github.com/Relfos/neo-lux)), REST API middleware, tests libraries, and test harness.
+This repository contains the source code for the Treatail Smart Contract for the NEP5 Token (TTL) and Treatail Asset management, Core middleware (leveraging [neo-lux](https://github.com/cityofzion/neo-lux)), REST API middleware, tests libraries, and test harness.
 
 ## The Product / dApp
 ### Overview
@@ -126,7 +126,7 @@ Microsft SQL Server, Redis, and Microsoft Cosmos DB
 Azure Blob Storage, NEO Blockchain
 
 ## Credits
-This project wouldn't have been possible without the support from the [City of Zion](https://github.com/CityOfZion) NEO development community.  A big shout out to Sérgio Flores ([Relfos](https://github.com/Relfos)) for his work on [neo-debugger-tools](https://github.com/Relfos/neo-debugger-tools) and [neo-lux](https://github.com/Relfos/neo-lux), and for all his assistance in helping me get neo-lux implemented in the project.  Thanks to Chris Hager ([Metachris](https://github.com/metachris)) for his assistance in getting started with neo-python and NEO development, and for his great work on [hosting a privatenet docker](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
+This project wouldn't have been possible without the support from the [City of Zion](https://github.com/CityOfZion) NEO development community.  A big shout out to Sérgio Flores ([Relfos](https://github.com/Relfos)) for his work on [neo-debugger-tools](https://github.com/Relfos/neo-debugger-tools) and [neo-lux](https://github.com/cityofzion/neo-lux), and for all his assistance in helping me get neo-lux implemented in the project.  Thanks to Chris Hager ([Metachris](https://github.com/metachris)) for his assistance in getting started with neo-python and NEO development, and for his great work on [hosting a privatenet docker](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
 
 
 
