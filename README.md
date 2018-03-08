@@ -22,11 +22,11 @@ Simply sign up for an account with your e-mail address to login as a buyer.  For
 ### Documentation
 #### Whitepaper
 A brief whitepaper for the Treatail product and blockchain offering can be found here:
-https://docs.google.com/document/d/1w7gRlUwW19UAfAmr1h0Vhd9hMxEF_YMk_9UdN2g7lwI
+https://drive.google.com/open?id=1UlcbIkmbPJnSHAFiY1V20TCX4s2XMsQO8NVwWSpfcnY
 
 #### Features and User Guide
 A Feature and User Guide for the functionality offered by Treatail
-https://docs.google.com/document/d/1bBZodhVxSy06pFpWvwerCgalxyYjhkymXMzGmIk2Lkw/edit?usp=sharing
+https://drive.google.com/open?id=1bBZodhVxSy06pFpWvwerCgalxyYjhkymXMzGmIk2Lkw
 
 #### Code and API Documentation 
 Commented code and Visual Studio XML comments, with additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
