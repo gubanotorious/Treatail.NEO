@@ -3,7 +3,7 @@
 </p>
 
 ## This Repository
-This repository contains the source code for the Treatail Smart Contract for the NEP5 Token (TTL) and Treatail Asset management, Core middleware (leveraging [neo-lux](https://github.com/cityofzion/neo-lux)), REST API middleware, tests libraries, and test harness.  It also contains a Smart Contract that will be used by the product in the future to facilitate deal escrow payments and supply chain workflows for deal fulfillment that is currently not implemented in the UI.
+This repository contains the source code for the Treatail Smart Contract for the NEP5 Token (TTL) and Treatail Asset management, Core middleware (leveraging [neo-lux](https://github.com/cityofzion/neo-lux)), REST API middleware, tests libraries, and test harness.  It also contains a preliminary version of the Smart Contract that will be used by the product in the future to facilitate deal escrow payments and supply chain workflows for deal fulfillment that is currently not tested and implemented in the UI.
 
 ## The Product / dApp
 ### Overview
