@@ -47,6 +47,12 @@ Microsft SQL Server, Redis, and Microsoft Cosmos DB
 #### Storage
 Azure Blob Storage, NEO Blockchain
 
+### ToDo / Roadmap
+- Integrate Treatail Token and Treatail Asset functionality into Treatail Mobile apps
+- Complete escrow workflow contract testing and development
+- Build escrow workflow tests
+- Build escrow and workflow features into Treatail app(s)
+
 ## Credits
 This project wouldn't have been possible without the support from the [City of Zion](https://github.com/CityOfZion) NEO development community.
 
