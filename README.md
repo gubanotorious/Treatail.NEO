@@ -29,7 +29,7 @@ A Feature and User Guide for the functionality offered by Treatail
 https://drive.google.com/open?id=1bBZodhVxSy06pFpWvwerCgalxyYjhkymXMzGmIk2Lkw
 
 #### Code and API Documentation 
-Commented code and Visual Studio XML comments, with additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
+Commented code w/Visual Studio XML comments, additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
 
 ### Architecture and Hosting
 #### Hosting
