@@ -3,11 +3,32 @@ using Neo.SmartContract.Framework.Services.Neo;
 using System;
 using System.Numerics;
 
-namespace Treatail.NEO.SmartContracts.EscrowWorkflowContract
+namespace Treatail.Blockchain.SmartContracts.EscrowContract
 {
+    public class Workflow
+    {
+        public BigInteger TotalSteps { get; set; }
+        public BigInteger TotalAmount { get; set; }
+
+        public Step[] Steps { get; set; }
+    }
+
+    public enum StepStatus
+    {
+        Pending = 0,
+        Completed = 1
+    }
+
+    public class Step
+    {
+        public StepStatus Status { get; set; }
+        public BigInteger PaymentAmount { get; set; }
+        public string PaymentAddress { get; set; }
+    }
+
     public class EscrowContract : SmartContract
     {
-        private static readonly byte[] _treatailAddress = "AKwhdHvupN2dRrMRTpNAFYgFQZiLmftmz6".ToScriptHash();
+        //private static readonly byte[] _treatailAddress = "AKwhdHvupN2dRrMRTpNAFYgFQZiLmftmz6".ToScriptHash();
 
         public static object Main(string action, object[] args)
         {
@@ -34,11 +55,11 @@ namespace Treatail.NEO.SmartContracts.EscrowWorkflowContract
 
         public static bool ExecuteNextStep(byte[] workflowId)
         {
-            if (!Runtime.CheckWitness(_treatailAddress))
-            {
-                Runtime.Notify("You do not have permissions to execute workflow steps.");
-                return false;
-            }
+            //if (!Runtime.CheckWitness(_treatailAddress))
+            //{
+            //    Runtime.Notify("You do not have permissions to execute workflow steps.");
+            //    return false;
+            //}
 
             var workflow = GetWorkflow(workflowId);
             var createdDateString = workflow[0];
@@ -70,22 +91,22 @@ namespace Treatail.NEO.SmartContracts.EscrowWorkflowContract
 
         public static bool AddWorkflowDetails(byte[] workflowId, byte[] workflowDetails)
         {
-            if (!Runtime.CheckWitness(_treatailAddress))
-            {
-                Runtime.Notify("You do not have permission to create workflows.");
-                return false;
-            }
+            //if (!Runtime.CheckWitness(_treatailAddress))
+            //{
+            //    Runtime.Notify("You do not have permission to create workflows.");
+            //    return false;
+            //}
 
             return SetWorkflowDetails(workflowId, workflowDetails);
         }
 
         public static bool AddStepDetails(byte[] workflowId, BigInteger stepId, byte[] stepDetails)
         {
-            if (!Runtime.CheckWitness(_treatailAddress))
-            {
-                Runtime.Notify("You do not have permission to add workflow steps.");
-                return false;
-            }
+            //if (!Runtime.CheckWitness(_treatailAddress))
+            //{
+            //    Runtime.Notify("You do not have permission to add workflow steps.");
+            //    return false;
+            //}
 
             return SetStepDetails(workflowId, stepId, stepDetails);
         }
