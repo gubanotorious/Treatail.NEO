@@ -32,6 +32,12 @@ https://drive.google.com/open?id=1bBZodhVxSy06pFpWvwerCgalxyYjhkymXMzGmIk2Lkw
 - Commented code w/Visual Studio XML comments
 - Additional compiled Microsoft HTML Help file (.chm) found in the /Docs folder
 
+#### Videos
+- Quick intro video
+https://youtu.be/1Ua_NGQfP9A
+- Video walkthrough basic blockchain based functionality (more detail in the user manual / whitepaper)
+https://youtu.be/Fcz8XJctHok
+
 ### Architecture and Hosting
 #### Hosting
 Treatail is hosted on Microsoft Azure - Platform as a Service
