@@ -34,7 +34,7 @@ https://drive.google.com/open?id=1bBZodhVxSy06pFpWvwerCgalxyYjhkymXMzGmIk2Lkw
 
 #### Videos
 - Quick intro video
-https://youtu.be/1Ua_NGQfP9A
+https://youtu.be/tWQ0baMSSr8
 - Video walkthrough basic blockchain based functionality (more detail in the user manual / whitepaper)
 https://youtu.be/Fcz8XJctHok
 
