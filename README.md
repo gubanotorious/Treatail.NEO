@@ -19,6 +19,9 @@ _You must use this URL when signing up and logging in.  If you use the standard 
 
 The extension you want to have installed is this version: https://chrome.google.com/webstore/detail/treatail/panhggdaegfhikjdbahbbgdoefoljjjl
 
+And you can make offers to the following store:
+https://treataildemo.bigcartel.com
+
 Simply sign up for an account with your e-mail address to login as a buyer.  For the demo, the only store that offers can be made to is the "Treatail Demo Store".  We will respond to all offers as the seller, but if you need to gain access to the seller interface, please e-mail me or find me on the NEO Smart Economy Discord [@gubanotorious](https://discord.gg/zRq6Jba).
 
 ### Documentation
